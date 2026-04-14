@@ -3,92 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Latest news and articles from Finance Insider 001.">
+<meta name="description" content="Latest news and articles from Tech &amp; Finance Daily.">
 
-<title>Finance Insider 001</title>
+<title>Tech &amp; Finance Daily</title>
 <link rel="canonical" href="https://blogbot-sites.pages.dev/sites/site-001">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#1a3a5c;
-  --secondary:#2c5f8a;
-  --accent:#f0a500;
-  --bg:#f8f9fa;
-  --text:#1c1c1c;
-  --font:&#39;Georgia&#39;, &#39;Times New Roman&#39;, serif;
-  --heading-font:&#39;Helvetica Neue&#39;, Arial, sans-serif;
-  --card-bg:#ffffff;
-  --border:#d0d7de;
+  --primary:#0066cc;
+  --secondary:#004a99;
+  --accent:#ff6600;
+  --bg:#ffffff;
+  --text:#1a1a1a;
+  --font:'Inter','Segoe UI',sans-serif;
+  --heading-font:'Merriweather','Georgia',serif;
+  --card-bg:#f5f8ff;
+  --border:#dde8f5;
+  --cat-color:#0066cc;
+  --hero-overlay:rgba(0,50,110,0.70);
 }
 
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.75;font-size:16px}
 img{max-width:100%;height:auto;display:block}
-a{color:var(--accent)}
-/* Layout */
-.wrapper{max-width:860px;margin:0 auto;padding:0 18px}
-/* Header */
-header{background:var(--primary);color:#fff;padding:13px 0;position:sticky;top:0;z-index:200;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.site-title{color:#fff;text-decoration:none;font-family:var(--heading-font);font-size:1.25rem;font-weight:700;letter-spacing:-.3px}
-nav{display:flex;align-items:center;gap:18px}
-.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem}
-.nav-links a:hover{color:#fff}
-/* Main */
-main{padding:28px 0 60px}
-/* Article */
-article h1{font-family:var(--heading-font);color:var(--primary);font-size:2rem;line-height:1.3;margin-bottom:14px}
-article h2{font-family:var(--heading-font);color:var(--secondary);font-size:1.45rem;margin:26px 0 10px;line-height:1.35}
-article h3{font-family:var(--heading-font);font-size:1.15rem;margin:18px 0 8px}
-article p{margin-bottom:1.15em}
-article ul,article ol{margin:0 0 1.15em 1.5em}
-article li{margin-bottom:.45em}
-article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(0,0,0,.04);font-style:italic}
-.meta{font-size:.85rem;color:#888;margin-bottom:18px}
-.featured-img{width:100%;max-height:440px;object-fit:cover;border-radius:8px;margin-bottom:22px}
-/* Disclosure */
-.disclosure{background:#fffbf0;border-left:4px solid var(--accent);padding:11px 15px;font-size:.85rem;color:#555;margin:18px 0;border-radius:0 4px 4px 0}
-.legal-footer-text{font-size:.8rem;color:#999;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)}
-/* Post cards */
-.section-title{font-family:var(--heading-font);font-size:1.5rem;color:var(--primary);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
-.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
-.post-card{background:var(--card-bg, #fff);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow .18s,transform .18s}
-.post-card:hover{box-shadow:0 5px 18px rgba(0,0,0,.12);transform:translateY(-2px)}
-.post-card-img{width:100%;height:175px;object-fit:cover;background:var(--secondary)}
-.post-card-body{padding:15px}
-.post-card-body h2{font-family:var(--heading-font);font-size:1.05rem;margin-bottom:7px;line-height:1.4}
-.post-card-body h2 a{color:var(--primary);text-decoration:none}
-.post-card-body h2 a:hover{color:var(--accent)}
-.post-card-body p{font-size:.88rem;color:#666;line-height:1.5}
-.card-meta{font-size:.78rem;color:#999;margin-top:10px}
-/* Ad slots */
+a{color:var(--accent);transition:color .2s ease}
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.wrapper{max-width:1200px;margin:0 auto;padding:0 20px}
+.wrapper-narrow{max-width:860px;margin:0 auto;padding:0 20px}
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.site-header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.header-accent-bar{height:4px;background:var(--accent);width:100%}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:16px}
+.site-title{color:#fff;text-decoration:none;font-family:var(--heading-font);font-size:1.45rem;font-weight:700;letter-spacing:-.4px;white-space:nowrap}
+.site-title:hover{color:var(--accent)}
+.header-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.header-nav a{color:rgba(255,255,255,.82);text-decoration:none;font-size:.82rem;font-weight:500;padding:5px 10px;border-radius:3px;transition:background .2s,color .2s}
+.header-nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+/* ── Category nav bar ─────────────────────────────────────────────────────── */
+.cat-nav{background:rgba(0,0,0,.18);border-top:1px solid rgba(255,255,255,.1)}
+.cat-nav-inner{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.cat-nav-inner::-webkit-scrollbar{display:none}
+.cat-nav a{color:rgba(255,255,255,.78);text-decoration:none;font-size:.78rem;font-weight:600;padding:8px 14px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.cat-nav a:hover,.cat-nav a.active{color:#fff;border-bottom-color:var(--accent)}
+/* ── Breaking news ticker ─────────────────────────────────────────────────── */
+.ticker-bar{background:var(--accent);color:#000;font-size:.8rem;font-weight:700;overflow:hidden;display:flex;align-items:center;height:34px}
+.ticker-label{background:rgba(0,0,0,.25);color:#fff;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
+.ticker-track-wrap{overflow:hidden;flex:1}
+.ticker-track{display:flex;animation:ticker-scroll 32s linear infinite;width:max-content}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{padding:0 40px;white-space:nowrap}
+.ticker-item a{color:#000;text-decoration:none;font-weight:600}
+.ticker-item a:hover{text-decoration:underline}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ── Hero section ─────────────────────────────────────────────────────────── */
+.hero{position:relative;overflow:hidden;background:var(--secondary);min-height:440px;display:flex;align-items:flex-end}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:var(--hero-overlay, rgba(0,0,0,.65));z-index:1}
+.hero-content{position:relative;z-index:2;padding:40px 20px 44px;max-width:1200px;margin:0 auto;width:100%}
+.hero-badge{display:inline-block;background:var(--accent);color:#000;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.hero-title{font-family:var(--heading-font);font-size:2.4rem;line-height:1.2;color:#fff;margin-bottom:14px;max-width:750px;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+.hero-excerpt{color:rgba(255,255,255,.88);font-size:1.02rem;line-height:1.6;max-width:620px;margin-bottom:22px}
+.hero-meta{font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:18px}
+.hero-btn{display:inline-block;background:var(--accent);color:#000;text-decoration:none;font-weight:700;font-size:.88rem;padding:10px 22px;border-radius:4px;transition:opacity .2s,transform .2s}
+.hero-btn:hover{opacity:.88;transform:translateY(-1px);color:#000}
+/* ── Secondary row (3-col) ──────────────────────────────────────────────────── */
+.secondary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:32px 0}
+/* ── Post cards (index) ──────────────────────────────────────────────────── */
+.section-label{font-family:var(--heading-font);font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:18px;padding-bottom:8px;border-bottom:3px solid var(--accent);display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.04em}
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:32px}
+.post-card{background:var(--card-bg,#fff);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .2s ease,transform .2s ease;display:flex;flex-direction:column}
+.post-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.13);transform:translateY(-3px)}
+.post-card:hover .post-card-img-wrap img{transform:scale(1.04)}
+.post-card-top-border{height:4px;background:transparent;transition:background .2s}
+.post-card:hover .post-card-top-border{background:var(--accent)}
+.post-card-img-wrap{overflow:hidden;aspect-ratio:16/9;background:var(--secondary)}
+.post-card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.post-card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.cat-badge{display:inline-block;background:var(--cat-color,var(--primary));color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:2px 8px;border-radius:20px;width:fit-content}
+.post-card-title{font-family:var(--heading-font);font-size:1rem;line-height:1.4;color:var(--text)}
+.post-card-title a{color:inherit;text-decoration:none;transition:color .2s}
+.post-card-title a:hover{color:var(--accent)}
+.post-card-excerpt{font-size:.85rem;color:#666;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.card-meta{font-size:.75rem;color:#999;margin-top:auto;display:flex;gap:8px;align-items:center}
+.card-meta-dot{opacity:.5}
+/* ── Ad slots ────────────────────────────────────────────────────────────── */
 .ad-header{text-align:center;padding:8px 0;min-height:10px}
-.ad-inline{text-align:center;margin:22px 0;min-height:10px}
-.ad-sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(20,20,20,.92);text-align:center;padding:4px 32px}
-.close-sticky{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#fff;background:none;border:none;font-size:1.4rem;cursor:pointer;line-height:1;padding:4px}
-/* Cookie banner */
+.ad-inline{text-align:center;margin:28px 0;min-height:10px}
+.ad-sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(15,15,15,.94);text-align:center;padding:5px 42px}
+.close-sticky{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#fff;background:none;border:none;font-size:1.4rem;cursor:pointer;line-height:1;padding:4px;opacity:.7}
+.close-sticky:hover{opacity:1}
+/* ── Cookie banner ───────────────────────────────────────────────────────── */
 #cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#111;color:#ddd;padding:13px 20px;display:none;align-items:center;justify-content:space-between;z-index:9998;font-size:.88rem;gap:14px;flex-wrap:wrap}
 #cookie-banner a{color:var(--accent)}
 #cookie-accept{background:var(--accent);color:#000;border:none;padding:7px 16px;border-radius:4px;cursor:pointer;font-weight:700;white-space:nowrap;font-size:.88rem}
-/* Adult gate */
+/* ── Adult gate ──────────────────────────────────────────────────────────── */
 .adult-gate{position:fixed;inset:0;background:#000;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px}
-.adult-gate h2{font-size:1.7rem;margin-bottom:14px}
+.adult-gate h2{font-size:1.7rem;margin-bottom:14px;font-family:var(--heading-font)}
 .adult-gate p{margin-bottom:22px;opacity:.8;max-width:500px}
 .adult-gate-btn{background:#c1121f;color:#fff;border:none;padding:13px 30px;font-size:1rem;border-radius:5px;cursor:pointer;margin:5px;font-family:var(--font)}
-/* Footer */
-footer{background:var(--primary);color:rgba(255,255,255,.75);padding:22px 0 90px;font-size:.88rem}
-.footer-links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
-.footer-links a{color:rgba(255,255,255,.65);text-decoration:none}
-.footer-links a:hover{color:#fff}
-.footer-bottom{font-size:.78rem;opacity:.55;margin-top:8px}
-/* RTL overrides */
+/* ── Article page layout ─────────────────────────────────────────────────── */
+.reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:9999;transition:width .1s linear}
+.breadcrumb{font-size:.8rem;color:#888;padding:12px 0;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.breadcrumb a{color:#888;text-decoration:none}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb-sep{opacity:.5}
+.article-header{margin-bottom:24px}
+.article-header .cat-badge{margin-bottom:12px}
+.article-title{font-family:var(--heading-font);font-size:2.4rem;line-height:1.2;color:var(--text);margin-bottom:16px}
+.article-meta{font-size:.85rem;color:#888;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.article-meta-dot{opacity:.45}
+.article-featured-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;margin-bottom:8px}
+.article-img-caption{font-size:.78rem;color:#999;text-align:center;margin-bottom:24px;font-style:italic}
+.article-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start;margin-top:20px}
+.article-body{min-width:0}
+.article-body p{font-size:1.05rem;line-height:1.85;margin-bottom:1.3em;color:var(--text)}
+.article-body h2{font-family:var(--heading-font);font-size:1.5rem;color:var(--primary);margin:2em 0 .7em;line-height:1.3;border-bottom:2px solid var(--border);padding-bottom:8px}
+.article-body h3{font-family:var(--heading-font);font-size:1.2rem;color:var(--secondary);margin:1.6em 0 .5em}
+.article-body ul,.article-body ol{margin:0 0 1.3em 1.6em}
+.article-body li{margin-bottom:.5em;font-size:1.02rem;line-height:1.75}
+.article-body blockquote{border-left:5px solid var(--accent);padding:14px 20px;margin:24px 0;background:rgba(0,0,0,.035);font-style:italic;font-size:1.12rem;line-height:1.7;border-radius:0 4px 4px 0}
+.article-body blockquote p{margin:0;font-size:inherit;color:inherit}
+.article-body img{border-radius:6px;margin:16px 0}
+.article-sidebar{position:sticky;top:80px}
+.sidebar-box{background:var(--card-bg,#fff);border:1px solid var(--border);border-radius:6px;padding:18px;margin-bottom:22px}
+.sidebar-box-title{font-family:var(--heading-font);font-size:.95rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.trending-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.trending-list li{display:flex;gap:10px;align-items:flex-start}
+.trending-num{font-family:var(--heading-font);font-size:1.4rem;font-weight:700;color:var(--accent);line-height:1;min-width:28px;opacity:.7}
+.trending-link{font-size:.875rem;color:var(--text);text-decoration:none;line-height:1.4;font-weight:500}
+.trending-link:hover{color:var(--accent)}
+.topics-cloud{display:flex;flex-wrap:wrap;gap:7px}
+.topic-tag{background:var(--border);color:var(--text);font-size:.76rem;padding:4px 10px;border-radius:20px;text-decoration:none;transition:background .2s,color .2s}
+.topic-tag:hover{background:var(--accent);color:#000}
+/* ── Share bar ───────────────────────────────────────────────────────────── */
+.share-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:28px 0 22px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.share-label{font-size:.85rem;font-weight:600;color:var(--text);margin-right:4px}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:4px;font-size:.82rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:opacity .2s,transform .2s;line-height:1}
+.share-btn:hover{opacity:.85;transform:translateY(-1px)}
+.share-btn-twitter{background:#000;color:#fff}
+.share-btn-facebook{background:#1877f2;color:#fff}
+.share-btn-copy{background:var(--border);color:var(--text)}
+/* ── Tags section ────────────────────────────────────────────────────────── */
+.article-tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tags-label{font-size:.82rem;font-weight:600;color:#888;margin-right:4px}
+.tag-pill{background:var(--border);color:var(--text);font-size:.78rem;padding:4px 12px;border-radius:20px;text-decoration:none;transition:background .2s,color .2s}
+.tag-pill:hover{background:var(--accent);color:#000}
+/* ── Disclosure & legal ──────────────────────────────────────────────────── */
+.disclosure{background:#fffbf0;border-left:4px solid var(--accent);padding:11px 16px;font-size:.83rem;color:#666;margin:20px 0;border-radius:0 4px 4px 0;line-height:1.55}
+.legal-footer-text{font-size:.78rem;color:#aaa;margin-top:28px;padding-top:14px;border-top:1px solid var(--border);line-height:1.6}
+.legal-footer-text a{color:#aaa}
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.site-footer{background:var(--primary);color:rgba(255,255,255,.75);padding:40px 0 90px;font-size:.88rem;margin-top:48px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-col-title{font-family:var(--heading-font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+.footer-col p{line-height:1.6;opacity:.75;font-size:.84rem}
+.footer-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px}
+.footer-col ul li a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.84rem;transition:color .2s}
+.footer-col ul li a:hover{color:#fff}
+.footer-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin-bottom:18px}
+.footer-bottom-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom-copy{font-size:.78rem;opacity:.5}
+.footer-bottom-links{display:flex;gap:14px;flex-wrap:wrap}
+.footer-bottom-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.78rem;transition:color .2s}
+.footer-bottom-links a:hover{color:#fff}
+/* ── Main padding ────────────────────────────────────────────────────────── */
+main{padding:0 0 60px}
+/* ── RTL overrides ───────────────────────────────────────────────────────── */
 [dir=rtl]{text-align:right}
-[dir=rtl] article ul,[dir=rtl] article ol{margin:0 1.5em 1.15em 0}
-[dir=rtl] article blockquote{border-left:none;border-right:4px solid var(--accent)}
+[dir=rtl] .article-body ul,[dir=rtl] .article-body ol{margin:0 1.6em 1.3em 0}
+[dir=rtl] .article-body blockquote{border-left:none;border-right:5px solid var(--accent);border-radius:4px 0 0 4px}
 [dir=rtl] .disclosure{border-left:none;border-right:4px solid var(--accent);border-radius:4px 0 0 4px}
-[dir=rtl] .footer-links{flex-direction:row-reverse}
-/* Responsive */
-@media(max-width:600px){article h1{font-size:1.5rem}article h2{font-size:1.2rem}.post-grid{grid-template-columns:1fr}#cookie-banner{flex-direction:column}}
+[dir=rtl] .breadcrumb,[dir=rtl] .header-inner,[dir=rtl] .cat-nav-inner{flex-direction:row-reverse}
+[dir=rtl] .footer-col ul{direction:rtl}
+[dir=rtl] .footer-bottom-row{flex-direction:row-reverse}
+[dir=rtl] .share-bar{flex-direction:row-reverse}
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr;gap:24px}.secondary-grid{grid-template-columns:repeat(2,1fr)}.post-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.article-layout{grid-template-columns:1fr}.article-sidebar{display:none}.article-title{font-size:1.75rem}.hero-title{font-size:1.6rem}.secondary-grid{grid-template-columns:1fr}.post-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.wrapper{padding:0 14px}.hero-content{padding:24px 14px 32px}.article-title{font-size:1.45rem}.header-inner{padding:8px 0}.cat-nav a{padding:7px 10px;font-size:.72rem}#cookie-banner{flex-direction:column}}
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print{.site-header,.site-footer,.ad-header,.ad-inline,.ad-sticky-footer,.ticker-bar,.cat-nav,.share-bar,.article-sidebar,#cookie-banner{display:none!important}.article-layout{display:block}.reading-progress{display:none}}
 
 </style>
 </head>
@@ -97,61 +196,172 @@ footer{background:var(--primary);color:rgba(255,255,255,.75);padding:22px 0 90px
 
 
 <div id="cookie-banner">
-  <span>We use cookies. <a href="/cookie-policy">Learn more</a></span>
+  <span>We use cookies to improve your experience. <a href="/cookie-policy">Learn more</a></span>
   <button id="cookie-accept">Accept</button>
 </div>
 
-<header>
+<header class="site-header">
+  <div class="header-accent-bar"></div>
   <div class="wrapper">
-    <nav>
-      <a href="/" class="site-title">Finance Insider 001</a>
-      <div class="nav-links"></div>
-    </nav>
+    <div class="header-inner">
+      <a href="/" class="site-title">Tech &amp; Finance Daily</a>
+      <nav class="header-nav" aria-label="Site navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <div class="cat-nav">
+    <div class="wrapper">
+      <div class="cat-nav-inner" id="catNavInner">
+        <!-- Populated by JS based on niche -->
+      </div>
+    </div>
   </div>
 </header>
+
+
+<div class="ticker-bar" aria-label="Breaking news">
+  <span class="ticker-label">LATEST</span>
+  <div class="ticker-track-wrap">
+    <div class="ticker-track" id="tickerTrack">
+      
+      <span class="ticker-item"><a href="/posts/market-context.html">How to Build a $1000/Month Passive Income Stream in 2026</a></span>
+      
+      <span class="ticker-item"><a href="/posts/5-ai-tools-to-revolutionize-your-work.html">5 AI Tools to Revolutionize Your Work</a></span>
+      
+      
+      <span class="ticker-item"><a href="/posts/market-context.html">How to Build a $1000/Month Passive Income Stream in 2026</a></span>
+      
+      <span class="ticker-item"><a href="/posts/5-ai-tools-to-revolutionize-your-work.html">5 AI Tools to Revolutionize Your Work</a></span>
+      
+    </div>
+  </div>
+</div>
+
 
 <div class="ad-header" aria-label="Advertisement"></div>
 
 <main>
-  <div class="wrapper">
-    <h2 class="section-title">Latest Posts</h2>
-    <div class="post-grid">
+  
+  
+  <section class="hero" aria-label="Featured article">
     
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">Featured</span>
+      <h1 class="hero-title"><a href="/posts/market-context.html" style="color:inherit;text-decoration:none">How to Build a $1000/Month Passive Income Stream in 2026</a></h1>
+      
+      <p class="hero-excerpt">A practical guide to building passive income streams that generate $1000+ per month.</p>
+      
+      <div class="hero-meta">2026-04-14</div>
+      <a href="/posts/market-context.html" class="hero-btn">Read More</a>
+    </div>
+  </section>
+  
+
+  <div class="wrapper">
+    
+    <div class="section-label" style="margin-top:32px">Top Stories</div>
+    <div class="secondary-grid">
+      
       <div class="post-card">
-        
-        <div class="post-card-img"></div>
-        
+        <div class="post-card-top-border"></div>
+        <div class="post-card-img-wrap">
+          
+        </div>
         <div class="post-card-body">
-          <h2><a href="/posts/market-context.html">Market Context</a></h2>
-          <p>How to Build — To build a $1000/month passive income stream in 2026, investors can focus on diversifying their portfolios with a mix of high-yield savings ac...</p>
-          <div class="card-meta">2026-04-14</div>
+          <span class="cat-badge">News</span>
+          <div class="post-card-title"><a href="/posts/5-ai-tools-to-revolutionize-your-work.html">5 AI Tools to Revolutionize Your Work</a></div>
+          <p class="post-card-excerpt">Discover the top AI tools transforming productivity in 2026.</p>
+          <div class="card-meta">
+            <span>2026-04-14</span>
+          </div>
         </div>
       </div>
-    
+      
     </div>
+    
+
+    
+
     <div class="ad-inline" aria-label="Advertisement"></div>
   </div>
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="wrapper">
-    <div class="footer-links">
-      <a href="/privacy-policy">Privacy Policy</a>
-      <a href="/terms-of-service">Terms of Service</a>
-      <a href="/affiliate-disclosure">Affiliate Disclosure</a>
-      <a href="/dmca">DMCA</a>
-      <a href="/cookie-policy">Cookie Policy</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">Tech &amp; Finance Daily</div>
+        <p>Delivering the latest news, analysis and insights. AI-assisted editorial content.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/affiliate-disclosure">Disclosure</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/terms-of-service">Terms of Service</a></li>
+          <li><a href="/cookie-policy">Cookie Policy</a></li>
+          <li><a href="/dmca">DMCA</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Follow</div>
+        <ul>
+          <li><a href="/" rel="noopener">Twitter / X</a></li>
+          <li><a href="/" rel="noopener">Pinterest</a></li>
+          <li><a href="/" rel="noopener">Telegram</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-bottom">&copy; Finance Insider 001 2026. AI-assisted content.</div>
+    <hr class="footer-divider">
+    <div class="footer-bottom-row">
+      <span class="footer-bottom-copy">&copy; Tech &amp; Finance Daily 2026. AI-assisted content.</span>
+      <div class="footer-bottom-links">
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-of-service">Terms</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <script>
 (function(){
+  // Cookie banner
   if(!localStorage.getItem('ck')){document.getElementById('cookie-banner').style.display='flex';}
   document.getElementById('cookie-accept').onclick=function(){localStorage.setItem('ck','1');document.getElementById('cookie-banner').style.display='none';};
+
+  // Category nav — niche-aware
+  var nicheCategories={
+    finance:['Markets','Investing','Crypto','Economy','Banking','Analysis'],
+    crypto:['Bitcoin','DeFi','NFTs','Markets','Altcoins','Regulation'],
+    health:['Nutrition','Fitness','Wellness','Medical','Mental Health','Research'],
+    tech:['AI','Gadgets','Software','Science','Security','Reviews'],
+    entertainment:['Movies','Celebrity','Music','Sports','TV','Viral']
+  };
+  var bodyClasses=document.body.className||'';
+  var defaultCats=['Latest','Top Stories','Analysis','Opinion','Trending','World'];
+  var cats=defaultCats;
+  for(var k in nicheCategories){
+    if(document.title.toLowerCase().indexOf(k)>=0||bodyClasses.indexOf(k)>=0){cats=nicheCategories[k];break;}
+  }
+  var nav=document.getElementById('catNavInner');
+  if(nav){
+    nav.innerHTML=cats.map(function(c){return'<a href="/">'+c+'</a>';}).join('');
+    if(nav.children.length>0){nav.children[0].classList.add('active');}
+  }
+
   
 })();
 </script>
