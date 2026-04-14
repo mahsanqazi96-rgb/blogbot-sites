@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Latest news and articles from Tech Wire 001.">
+
+<title>Tech Wire 001</title>
+<link rel="canonical" href="https://blogbot-sites.pages.dev">
+
+<style>
+:root{
+  --primary:#0066cc;
+  --secondary:#004a99;
+  --accent:#ff6600;
+  --bg:#ffffff;
+  --text:#1a1a1a;
+  --font:&#39;Roboto&#39;, &#39;Segoe UI&#39;, sans-serif;
+  --heading-font:&#39;Roboto&#39;, &#39;Segoe UI&#39;, sans-serif;
+  --card-bg:#f5f8ff;
+  --border:#dde8f5;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.75;font-size:16px}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent)}
+/* Layout */
+.wrapper{max-width:860px;margin:0 auto;padding:0 18px}
+/* Header */
+header{background:var(--primary);color:#fff;padding:13px 0;position:sticky;top:0;z-index:200;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.site-title{color:#fff;text-decoration:none;font-family:var(--heading-font);font-size:1.25rem;font-weight:700;letter-spacing:-.3px}
+nav{display:flex;align-items:center;gap:18px}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem}
+.nav-links a:hover{color:#fff}
+/* Main */
+main{padding:28px 0 60px}
+/* Article */
+article h1{font-family:var(--heading-font);color:var(--primary);font-size:2rem;line-height:1.3;margin-bottom:14px}
+article h2{font-family:var(--heading-font);color:var(--secondary);font-size:1.45rem;margin:26px 0 10px;line-height:1.35}
+article h3{font-family:var(--heading-font);font-size:1.15rem;margin:18px 0 8px}
+article p{margin-bottom:1.15em}
+article ul,article ol{margin:0 0 1.15em 1.5em}
+article li{margin-bottom:.45em}
+article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:16px 0;background:rgba(0,0,0,.04);font-style:italic}
+.meta{font-size:.85rem;color:#888;margin-bottom:18px}
+.featured-img{width:100%;max-height:440px;object-fit:cover;border-radius:8px;margin-bottom:22px}
+/* Disclosure */
+.disclosure{background:#fffbf0;border-left:4px solid var(--accent);padding:11px 15px;font-size:.85rem;color:#555;margin:18px 0;border-radius:0 4px 4px 0}
+.legal-footer-text{font-size:.8rem;color:#999;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)}
+/* Post cards */
+.section-title{font-family:var(--heading-font);font-size:1.5rem;color:var(--primary);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.post-card{background:var(--card-bg, #fff);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow .18s,transform .18s}
+.post-card:hover{box-shadow:0 5px 18px rgba(0,0,0,.12);transform:translateY(-2px)}
+.post-card-img{width:100%;height:175px;object-fit:cover;background:var(--secondary)}
+.post-card-body{padding:15px}
+.post-card-body h2{font-family:var(--heading-font);font-size:1.05rem;margin-bottom:7px;line-height:1.4}
+.post-card-body h2 a{color:var(--primary);text-decoration:none}
+.post-card-body h2 a:hover{color:var(--accent)}
+.post-card-body p{font-size:.88rem;color:#666;line-height:1.5}
+.card-meta{font-size:.78rem;color:#999;margin-top:10px}
+/* Ad slots */
+.ad-header{text-align:center;padding:8px 0;min-height:10px}
+.ad-inline{text-align:center;margin:22px 0;min-height:10px}
+.ad-sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(20,20,20,.92);text-align:center;padding:4px 32px}
+.close-sticky{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#fff;background:none;border:none;font-size:1.4rem;cursor:pointer;line-height:1;padding:4px}
+/* Cookie banner */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#111;color:#ddd;padding:13px 20px;display:none;align-items:center;justify-content:space-between;z-index:9998;font-size:.88rem;gap:14px;flex-wrap:wrap}
+#cookie-banner a{color:var(--accent)}
+#cookie-accept{background:var(--accent);color:#000;border:none;padding:7px 16px;border-radius:4px;cursor:pointer;font-weight:700;white-space:nowrap;font-size:.88rem}
+/* Adult gate */
+.adult-gate{position:fixed;inset:0;background:#000;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px}
+.adult-gate h2{font-size:1.7rem;margin-bottom:14px}
+.adult-gate p{margin-bottom:22px;opacity:.8;max-width:500px}
+.adult-gate-btn{background:#c1121f;color:#fff;border:none;padding:13px 30px;font-size:1rem;border-radius:5px;cursor:pointer;margin:5px;font-family:var(--font)}
+/* Footer */
+footer{background:var(--primary);color:rgba(255,255,255,.75);padding:22px 0 90px;font-size:.88rem}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.footer-links a{color:rgba(255,255,255,.65);text-decoration:none}
+.footer-links a:hover{color:#fff}
+.footer-bottom{font-size:.78rem;opacity:.55;margin-top:8px}
+/* RTL overrides */
+[dir=rtl]{text-align:right}
+[dir=rtl] article ul,[dir=rtl] article ol{margin:0 1.5em 1.15em 0}
+[dir=rtl] article blockquote{border-left:none;border-right:4px solid var(--accent)}
+[dir=rtl] .disclosure{border-left:none;border-right:4px solid var(--accent);border-radius:4px 0 0 4px}
+[dir=rtl] .footer-links{flex-direction:row-reverse}
+/* Responsive */
+@media(max-width:600px){article h1{font-size:1.5rem}article h2{font-size:1.2rem}.post-grid{grid-template-columns:1fr}#cookie-banner{flex-direction:column}}
+
+</style>
+</head>
+<body>
+
+
+
+<div id="cookie-banner">
+  <span>We use cookies. <a href="/cookie-policy">Learn more</a></span>
+  <button id="cookie-accept">Accept</button>
+</div>
+
+<header>
+  <div class="wrapper">
+    <nav>
+      <a href="/" class="site-title">Tech Wire 001</a>
+      <div class="nav-links"></div>
+    </nav>
+  </div>
+</header>
+
+<div class="ad-header" aria-label="Advertisement"></div>
+
+<main>
+  <div class="wrapper">
+    <h2 class="section-title">Latest Posts</h2>
+    <div class="post-grid">
+    
+      <div class="post-card">
+        
+        <div class="post-card-img"></div>
+        
+        <div class="post-card-body">
+          <h2><a href="/posts/5-ai-tools-to-revolutionize-your-work.html">5 AI Tools to Revolutionize Your Work</a></h2>
+          <p>The 5 AI tools that will change how you work in 2026 are AI-powered project management tools, automated customer service chatbots, virtual assistants, predic...</p>
+          <div class="card-meta">2026-04-14</div>
+        </div>
+      </div>
+    
+    </div>
+    <div class="ad-inline" aria-label="Advertisement"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrapper">
+    <div class="footer-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-of-service">Terms of Service</a>
+      <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      <a href="/dmca">DMCA</a>
+      <a href="/cookie-policy">Cookie Policy</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="footer-bottom">&copy; Tech Wire 001 2026. AI-assisted content.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!localStorage.getItem('ck')){document.getElementById('cookie-banner').style.display='flex';}
+  document.getElementById('cookie-accept').onclick=function(){localStorage.setItem('ck','1');document.getElementById('cookie-banner').style.display='none';};
+  
+})();
+</script>
+</body>
+</html>
