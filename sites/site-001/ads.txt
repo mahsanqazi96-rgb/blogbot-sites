@@ -1,0 +1,6 @@
+# BlogBot ads.txt — auto-generated
+# Updated: 2026-04-14
+
+popads.net, PLACEHOLDER_ID, DIRECT
+adsterra.com, PLACEHOLDER_ID, DIRECT
+monetag.com, PLACEHOLDER_ID, DIRECT
