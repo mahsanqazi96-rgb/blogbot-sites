@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://blogbot-sites.pages.dev/sitemap.xml
+
+# BlogBot — auto-generated
