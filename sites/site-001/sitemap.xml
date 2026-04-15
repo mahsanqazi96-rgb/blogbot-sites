@@ -2,20 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blogbot-sites.pages.dev/sites/site-001/</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://site-001.pages.dev/</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://blogbot-sites.pages.dev/sites/site-001/posts/5-ai-tools-to-revolutionize-your-work.html</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blogbot-sites.pages.dev/sites/site-001/posts/market-context.html</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://site-001.pages.dev/posts/understanding-bitcoin-etf.html</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
