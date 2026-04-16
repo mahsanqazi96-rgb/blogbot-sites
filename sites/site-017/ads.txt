@@ -1,5 +1,1 @@
-# BlogBot ads.txt — auto-generated
-# Updated: 2026-04-15
-
-
-
+# ads.txt — updated after ad network approval
