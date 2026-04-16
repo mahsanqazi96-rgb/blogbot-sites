@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://site-001.pages.dev/sitemap.xml
-
-# BlogBot — auto-generated
+Sitemap: https://blogbot-sites.pages.dev/sites/site-017/sitemap.xml
