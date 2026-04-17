@@ -2,29 +2,675 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TopicPulse — Fresh Perspectives Daily</title>
-<meta name="description" content="TopicPulse is a multi-niche content network covering finance, tech, health, and entertainment. Updated daily with fresh articles.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TopicPulse &mdash; 100 Blogs, 5 Niches, Daily Updates</title>
+<meta name="description" content="TopicPulse is a network of 100 automated blogs covering Crypto, Finance, Health, Tech, and Entertainment &mdash; updated daily.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
-h1{font-size:2.5rem;font-weight:800;color:#38bdf8;letter-spacing:-1px;margin-bottom:.5rem}
-p{color:#94a3b8;font-size:1.1rem;margin-bottom:2rem;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;width:100%;max-width:900px}
-a{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:1.2rem;text-decoration:none;color:#e2e8f0;font-weight:600;text-align:center;transition:all .2s}
-a:hover{background:#334155;border-color:#38bdf8;color:#38bdf8}
-.tag{display:inline-block;font-size:.7rem;background:#0ea5e9;color:#fff;padding:.2rem .6rem;border-radius:999px;margin-bottom:.5rem}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f172a;color:#e2e8f0;font-family:'Inter',sans-serif;line-height:1.6;min-height:100vh}
+a{text-decoration:none;color:inherit}
+.topbar{background:#1e293b;border-bottom:1px solid #334155;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.topbar-logo{font-size:1.5rem;font-weight:800;letter-spacing:-1px;color:#f8fafc}
+.topbar-logo em{color:#3b82f6;font-style:normal}
+.topbar-tagline{font-size:.8rem;color:#94a3b8}
+.hero{background:linear-gradient(135deg,#1e293b 0%,#0f172a 60%,#1a1033 100%);padding:52px 24px 44px;text-align:center;border-bottom:1px solid #1e293b}
+.hero h1{font-size:2.6rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:12px;line-height:1.15}
+.hero h1 span{background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1rem;color:#94a3b8;max-width:500px;margin:0 auto 28px}
+.stats-bar{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:32px}
+.stat{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:800;color:#f8fafc;line-height:1}
+.stat-label{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.search-wrap{max-width:460px;margin:0 auto;position:relative}
+.search-wrap input{width:100%;padding:12px 20px 12px 44px;background:#1e293b;border:2px solid #334155;border-radius:12px;color:#f1f5f9;font-size:.95rem;outline:none;transition:border-color .2s}
+.search-wrap input:focus{border-color:#3b82f6}
+.search-wrap input::placeholder{color:#64748b}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#64748b;font-size:1rem}
+.filter-tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:28px 24px 0}
+.filter-tab{padding:7px 18px;border-radius:999px;font-size:.8rem;font-weight:600;border:2px solid #334155;color:#94a3b8;cursor:pointer;transition:.2s;background:transparent}
+.filter-tab:hover{border-color:#3b82f6;color:#f1f5f9}
+.filter-tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.filter-tab[data-filter="crypto"].active{background:#00ff88;border-color:#00ff88;color:#000}
+.filter-tab[data-filter="finance"].active{background:#c8000a;border-color:#c8000a;color:#fff}
+.filter-tab[data-filter="health"].active{background:#38a169;border-color:#38a169;color:#fff}
+.filter-tab[data-filter="tech"].active{background:#ff4500;border-color:#ff4500;color:#fff}
+.filter-tab[data-filter="entertainment"].active{background:#e31c5f;border-color:#e31c5f;color:#fff}
+.main{max-width:1200px;margin:0 auto;padding:32px 24px 60px}
+.niche-section{margin-bottom:48px}
+.niche-header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:#1e293b;border-radius:10px 10px 0 0}
+.niche-badge{padding:4px 14px;border-radius:6px;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.niche-count{font-size:.78rem;color:#64748b;margin-left:auto}
+.blog-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#1e293b;border:1px solid #1e293b;border-top:none;border-radius:0 0 10px 10px;overflow:hidden}
+@media(max-width:1000px){.blog-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+.blog-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 10px;background:#0f172a;gap:8px;transition:background .15s;text-align:center;min-height:90px}
+.blog-card:hover{background:#1e293b}
+.blog-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.blog-name{font-size:.8rem;font-weight:600;color:#e2e8f0;line-height:1.2}
+.blog-arrow{font-size:.75rem;color:#475569;transition:.2s}
+.blog-card:hover .blog-arrow{color:#3b82f6}
+.niche-section.hidden{display:none}
+.blog-card.hidden{display:none}
+footer{background:#1e293b;border-top:1px solid #334155;padding:24px;text-align:center;font-size:.78rem;color:#475569}
+footer strong{color:#94a3b8}
 </style>
 </head>
 <body>
-<h1>TopicPulse</h1>
-<p>Fresh perspectives on the stories that matter — finance, tech, health &amp; entertainment.</p>
-<div class="grid">
-<a href="/bitsignal/"><span class="tag">Crypto</span><br>BitSignal</a>
-<a href="/wealthwire/"><span class="tag">Finance</span><br>WealthWire</a>
-<a href="/fitpulse/"><span class="tag">Health</span><br>FitPulse</a>
-<a href="/techbeat/"><span class="tag">Tech</span><br>TechBeat</a>
-<a href="/viralvault/"><span class="tag">Entertainment</span><br>ViralVault</a>
+
+<div class="topbar">
+  <div class="topbar-logo">Topic<em>Pulse</em></div>
+  <div class="topbar-tagline">Automated content network &mdash; 5 niches, 100 blogs</div>
 </div>
+
+<div class="hero">
+  <h1>100 Blogs. <span>5 Niches.</span><br>Daily Updates.</h1>
+  <p class="hero-sub">TopicPulse is an automated content network covering Crypto, Finance, Health, Tech, and Entertainment &mdash; updated every day.</p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">100</div><div class="stat-label">Blogs</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Niches</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Languages</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Updates</div></div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">&#x1F50D;</span>
+    <input type="text" id="blogSearch" placeholder="Search blogs by name..." autocomplete="off">
+  </div>
+</div>
+
+<div class="filter-tabs">
+  <button class="filter-tab active" data-filter="all">All (100)</button>
+  <button class="filter-tab" data-filter="crypto">Crypto (10)</button>
+  <button class="filter-tab" data-filter="finance">Finance (10)</button>
+  <button class="filter-tab" data-filter="health">Health (20)</button>
+  <button class="filter-tab" data-filter="tech">Tech (30)</button>
+  <button class="filter-tab" data-filter="entertainment">Entertainment (30)</button>
+</div>
+
+<main class="main">
+
+  <section class="niche-section" data-niche="crypto">
+    <div class="niche-header" style="border-left:5px solid #00ff88">
+      <span class="niche-badge" style="background:#00ff88;color:#000">Crypto</span>
+      <span class="niche-count">10 blogs</span>
+    </div>
+    <div class="blog-grid">
+          <a class="blog-card" href="/altcoinhub/" data-name="altcoinhub">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">AltCoinHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bitsignal/" data-name="bitsignal">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">BitSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/blockwire/" data-name="blockwire">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">BlockWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/chainedge/" data-name="chainedge">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">ChainEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/cryptoinsiderdaily/" data-name="cryptoinsider daily">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">CryptoInsider Daily</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/cryptovault/" data-name="cryptovault">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">CryptoVault</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/defiscope/" data-name="defiscope">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">DefiScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/hashbrief/" data-name="hashbrief">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">HashBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/satoshilog/" data-name="satoshilog">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">SatoshiLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/tokenwatch/" data-name="tokenwatch">
+            <span class="blog-icon" style="background:#00ff8822;color:#00ff88">&#x20BF;</span>
+            <span class="blog-name">TokenWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+    </div>
+  </section>
+  <section class="niche-section" data-niche="finance">
+    <div class="niche-header" style="border-left:5px solid #c8000a">
+      <span class="niche-badge" style="background:#c8000a;color:#fff">Finance</span>
+      <span class="niche-count">10 blogs</span>
+    </div>
+    <div class="blog-grid">
+          <a class="blog-card" href="/budgetwise/" data-name="budgetwise">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">BudgetWise</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/capitalbrief/" data-name="capitalbrief">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">CapitalBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/fundscope/" data-name="fundscope">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">FundScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/investhub/" data-name="investhub">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">InvestHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/marketpulse/" data-name="marketpulse">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">MarketPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/portfoliolog/" data-name="portfoliolog">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">PortfolioLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/stocksignal/" data-name="stocksignal">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">StockSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/tradeedge/" data-name="tradeedge">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">TradeEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/wealthwire/" data-name="wealthwire">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">WealthWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/yieldwatch/" data-name="yieldwatch">
+            <span class="blog-icon" style="background:#c8000a22;color:#c8000a">$</span>
+            <span class="blog-name">YieldWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+    </div>
+  </section>
+  <section class="niche-section" data-niche="health">
+    <div class="niche-header" style="border-left:5px solid #38a169">
+      <span class="niche-badge" style="background:#38a169;color:#fff">Health</span>
+      <span class="niche-count">20 blogs</span>
+    </div>
+    <div class="blog-grid">
+          <a class="blog-card" href="/activebrief/" data-name="activebrief">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">ActiveBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/activehub/" data-name="activehub">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">ActiveHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bodysignal/" data-name="bodysignal">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">BodySignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bodywatch/" data-name="bodywatch">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">BodyWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/curehub/" data-name="curehub">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">CureHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/curelog/" data-name="curelog">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">CureLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/fitpulse/" data-name="fitpulse">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">FitPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/fitzone/" data-name="fitzone">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">FitZone</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/healthhub/" data-name="healthhub">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">HealthHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/healthwire/" data-name="healthwire">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">HealthWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/mindscope/" data-name="mindscope">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">MindScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/mindwire/" data-name="mindwire">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">MindWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/nutriscope/" data-name="nutriscope">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">NutriScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/nutriwire/" data-name="nutriwire">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">NutriWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/slimscope/" data-name="slimscope">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">SlimScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/slimsignal/" data-name="slimsignal">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">SlimSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/vitalbrief/" data-name="vitalbrief">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">VitalBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/vitaledge/" data-name="vitaledge">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">VitalEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/wellpulse/" data-name="wellpulse">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">WellPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/wellnessedge/" data-name="wellnessedge">
+            <span class="blog-icon" style="background:#38a16922;color:#38a169">&#x2665;</span>
+            <span class="blog-name">WellnessEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+    </div>
+  </section>
+  <section class="niche-section" data-niche="tech">
+    <div class="niche-header" style="border-left:5px solid #ff4500">
+      <span class="niche-badge" style="background:#ff4500;color:#fff">Tech</span>
+      <span class="niche-count">30 blogs</span>
+    </div>
+    <div class="blog-grid">
+          <a class="blog-card" href="/appedge/" data-name="appedge">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">AppEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/applog/" data-name="applog">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">AppLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/apppulse/" data-name="apppulse">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">AppPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/appscope/" data-name="appscope">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">AppScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bytescope/" data-name="bytescope">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">ByteScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bytesignal/" data-name="bytesignal">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">ByteSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bytewatch/" data-name="bytewatch">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">ByteWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/bytewire/" data-name="bytewire">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">ByteWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/codeedge/" data-name="codeedge">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">CodeEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/codelog/" data-name="codelog">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">CodeLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/codesignal/" data-name="codesignal">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">CodeSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/codewire/" data-name="codewire">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">CodeWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/devbrief/" data-name="devbrief">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DevBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/devhub/" data-name="devhub">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DevHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/devpulse/" data-name="devpulse">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DevPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/devwatch/" data-name="devwatch">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DevWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/digitalbrief/" data-name="digitalbrief">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DigitalBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/digitaledge/" data-name="digitaledge">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DigitalEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/digitalhub/" data-name="digitalhub">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DigitalHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/digitalwatch/" data-name="digitalwatch">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">DigitalWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/gadgetbrief/" data-name="gadgetbrief">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">GadgetBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/gadgetlog/" data-name="gadgetlog">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">GadgetLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/gadgetpulse/" data-name="gadgetpulse">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">GadgetPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/gadgetscope/" data-name="gadgetscope">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">GadgetScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/gadgetwire/" data-name="gadgetwire">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">GadgetWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/techbeat/" data-name="techbeat">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">TechBeat</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/techedge/" data-name="techedge">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">TechEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/techhub/" data-name="techhub">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">TechHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/techscope/" data-name="techscope">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">TechScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/techsignal/" data-name="techsignal">
+            <span class="blog-icon" style="background:#ff450022;color:#ff4500">&#x26A1;</span>
+            <span class="blog-name">TechSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+    </div>
+  </section>
+  <section class="niche-section" data-niche="entertainment">
+    <div class="niche-header" style="border-left:5px solid #e31c5f">
+      <span class="niche-badge" style="background:#e31c5f;color:#fff">Entertainment</span>
+      <span class="niche-count">30 blogs</span>
+    </div>
+    <div class="blog-grid">
+          <a class="blog-card" href="/buzzedge/" data-name="buzzedge">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">BuzzEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/buzzlog/" data-name="buzzlog">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">BuzzLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/buzzwatch/" data-name="buzzwatch">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">BuzzWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/buzzwire/" data-name="buzzwire">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">BuzzWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/celebedge/" data-name="celebedge">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">CelebEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/celebpulse/" data-name="celebpulse">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">CelebPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/celebscope/" data-name="celebscope">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">CelebScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/celebwire/" data-name="celebwire">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">CelebWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/famehub/" data-name="famehub">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">FameHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/famelog/" data-name="famelog">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">FameLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/famesignal/" data-name="famesignal">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">FameSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/hypebrief/" data-name="hypebrief">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">HypeBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/hypehub/" data-name="hypehub">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">HypeHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/hypesignal/" data-name="hypesignal">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">HypeSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/popbrief/" data-name="popbrief">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">PopBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/poppulse/" data-name="poppulse">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">PopPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/popscope/" data-name="popscope">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">PopScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/popwire/" data-name="popwire">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">PopWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/starbrief/" data-name="starbrief">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">StarBrief</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/starpulse/" data-name="starpulse">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">StarPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/starscope/" data-name="starscope">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">StarScope</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/starsignal/" data-name="starsignal">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">StarSignal</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/trendedge/" data-name="trendedge">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">TrendEdge</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/trendpulse/" data-name="trendpulse">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">TrendPulse</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/trendwatch/" data-name="trendwatch">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">TrendWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/trendwire/" data-name="trendwire">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">TrendWire</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/viralhub/" data-name="viralhub">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">ViralHub</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/virallog/" data-name="virallog">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">ViralLog</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/viralwatch/" data-name="viralwatch">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">ViralWatch</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+          <a class="blog-card" href="/viralzone/" data-name="viralzone">
+            <span class="blog-icon" style="background:#e31c5f22;color:#e31c5f">&#x2605;</span>
+            <span class="blog-name">ViralZone</span>
+            <span class="blog-arrow">&#x2192;</span>
+          </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 <strong>TopicPulse</strong> &mdash; Automated blogging network &mdash; 100 blogs across 5 niches
+</footer>
+
+<script>
+(function(){
+  var search = document.getElementById('blogSearch');
+  var tabs = document.querySelectorAll('.filter-tab');
+  var sections = document.querySelectorAll('.niche-section');
+  var activeFilter = 'all';
+
+  function applyFilters() {
+    var q = search.value.trim().toLowerCase();
+    sections.forEach(function(sec) {
+      var niche = sec.dataset.niche;
+      var nicheMatch = (activeFilter === 'all' || activeFilter === niche);
+      if (!nicheMatch) { sec.classList.add('hidden'); return; }
+      sec.classList.remove('hidden');
+      var visibleCards = 0;
+      sec.querySelectorAll('.blog-card').forEach(function(card) {
+        var nameMatch = !q || card.dataset.name.includes(q);
+        if (nameMatch) { card.classList.remove('hidden'); visibleCards++; }
+        else { card.classList.add('hidden'); }
+      });
+      if (visibleCards === 0 && q) sec.classList.add('hidden');
+    });
+  }
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      activeFilter = tab.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  search.addEventListener('input', applyFilters);
+})();
+</script>
 </body>
 </html>
