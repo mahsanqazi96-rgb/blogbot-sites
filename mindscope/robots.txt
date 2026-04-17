@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blogbot-sites.pages.dev/sites/site-030/sitemap.xml
