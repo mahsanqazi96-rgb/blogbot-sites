@@ -6,65 +6,61 @@
 <title>CureLog</title>
 <meta name="description" content="Latest health news and analysis from CureLog.">
 <link rel="canonical" href="https://topicpulse.pages.dev/curelog">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#fafef7;color:#2c3e50;font-family:'Lato',sans-serif;line-height:1.7}
-a{color:#38a169;text-decoration:none}
-.hdr{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.06);padding:0 24px;position:sticky;top:0;z-index:100}
-.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:800;color:#2d6a4f;display:flex;align-items:center;gap:8px}
-.logo-leaf{font-size:1.3rem}
-.nav a{color:#555;font-size:.82rem;font-weight:700;margin-left:20px;padding:6px 14px;border-radius:20px;transition:background .2s}
-.nav a:hover{background:#d8f3dc;color:#2d6a4f}
-.filters{max-width:1100px;margin:20px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:6px 16px;border-radius:999px;font-size:.78rem;font-weight:700;border:2px solid #d8f3dc;color:#2d6a4f;cursor:pointer;transition:.2s}
-.pill.active,.pill:hover{background:#38a169;color:#fff;border-color:#38a169}
-.wrap{max-width:1100px;margin:0 auto;padding:28px 24px}
-.section-label{font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:800;color:#38a169;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:"";flex:1;height:2px;background:#d8f3dc;border-radius:1px}
-.hero-card{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(45,106,79,.08);margin-bottom:28px;display:grid;grid-template-columns:1.4fr 1fr}
+body{background:#fff;color:#1a1a1a;font-family:'Montserrat',sans-serif;line-height:1.6}
+a{color:#805ad5;text-decoration:none}
+.hdr{background:#fff;border-bottom:3px solid #805ad5;padding:0 24px;position:sticky;top:0;z-index:100}
+.hdr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-size:1.35rem;font-weight:900;color:#1a1a1a;text-transform:uppercase;letter-spacing:-0.5px}
+.logo span{color:#805ad5}
+.nav a{color:#444;font-size:.75rem;font-weight:700;margin-left:16px;text-transform:uppercase;letter-spacing:.06em;transition:.2s}
+.nav a:hover{color:#805ad5}
+.hero-strip{background:#805ad5;padding:10px 24px}
+.hero-strip-inner{max-width:1200px;margin:0 auto;display:flex;gap:24px;overflow-x:auto}
+.strip-tag{background:rgba(255,255,255,.25);color:#fff;font-size:.68rem;font-weight:700;padding:3px 12px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 24px}
+.sec-bar{display:flex;align-items:center;gap:0;margin-bottom:20px}
+.sec-bar-label{background:#805ad5;color:#fff;font-size:.7rem;font-weight:700;padding:5px 14px;text-transform:uppercase;letter-spacing:.1em}
+.sec-bar-line{flex:1;height:2px;background:#f0f0f0}
+.hero-card{display:grid;grid-template-columns:1.4fr 1fr;gap:0;margin-bottom:28px;border:2px solid #f0f0f0;border-radius:4px;overflow:hidden}
 @media(max-width:700px){.hero-card{grid-template-columns:1fr}}
-.hero-card img{width:100%;height:100%;min-height:280px;object-fit:cover}
-.hero-card-body{padding:28px}
-.tag-pill{display:inline-block;background:#d8f3dc;color:#2d6a4f;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
-.hero-card h2{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.28;margin-bottom:10px;color:#1a2e1f}
-.hero-card h2 a{color:#1a2e1f}.hero-card h2 a:hover{color:#38a169}
-.hero-card .excerpt{font-size:.88rem;color:#555;line-height:1.6;margin-bottom:14px}
-.read-more{display:inline-flex;align-items:center;gap:6px;background:#38a169;color:#fff;font-size:.8rem;font-weight:700;padding:8px 18px;border-radius:999px;transition:.2s}
-.read-more:hover{background:#2d6a4f;color:#fff}
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:800px){.card-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.card-grid{grid-template-columns:1fr}}
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1)}
-.card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:16px}
-.card .tag-pill{margin-bottom:8px}
-.card h3{font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;line-height:1.3;color:#1a2e1f;margin-bottom:6px}
-.card h3 a{color:#1a2e1f}.card h3 a:hover{color:#38a169}
-.card .date{font-size:.72rem;color:#aaa}
-.empty{text-align:center;padding:80px 20px}
-.empty-icon{font-size:3rem;margin-bottom:12px}
-.empty h2{font-family:'Nunito',sans-serif;font-size:1.4rem;color:#2d6a4f;margin-bottom:8px}
-.empty p{color:#888;font-size:.9rem}
-footer{background:#1a2e1f;color:#b7e4c7;text-align:center;padding:24px;font-size:.78rem;margin-top:60px;border-radius:20px 20px 0 0}
+.hero-card img{width:100%;height:100%;min-height:260px;object-fit:cover}
+.hero-body{padding:24px}
+.cat-tag{display:inline-block;background:#805ad5;color:#fff;font-size:.62rem;font-weight:700;padding:2px 8px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.hero-body h2{font-size:1.4rem;font-weight:800;line-height:1.2;color:#1a1a1a;margin-bottom:8px}
+.hero-body h2 a{color:#1a1a1a}.hero-body h2 a:hover{color:#805ad5}
+.hero-body .meta{font-size:.72rem;color:#aaa;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{border:2px solid #f0f0f0;border-radius:4px;overflow:hidden;transition:border-color .2s}
+.card:hover{border-color:#805ad5}
+.card img{width:100%;height:160px;object-fit:cover}
+.card-body{padding:12px}
+.card h3{font-size:.9rem;font-weight:700;line-height:1.3;color:#1a1a1a}
+.card h3 a{color:#1a1a1a}.card h3 a:hover{color:#805ad5}
+.card .meta{font-size:.65rem;color:#aaa;margin-top:6px}
+.empty{text-align:center;padding:70px 20px;color:#aaa}
+.empty h2{font-size:1.3rem;font-weight:800;text-transform:uppercase;color:#805ad5;margin-bottom:8px}
+footer{background:#1a1a1a;color:#888;text-align:center;padding:18px;font-size:.72rem;margin-top:48px}
+footer a{color:#805ad5}
 </style></head>
 <body>
 <header class="hdr"><div class="hdr-inner">
-<div class="logo"><span class="logo-leaf">&#x1F33F;</span>CureLog</div>
-<nav class="nav"><a href="https://topicpulse.pages.dev/curelog/">Home</a><a href="#">Nutrition</a><a href="#">Fitness</a><a href="#">Wellness</a></nav>
+<div class="logo"><span>Cur</span>eLog</div>
+<nav class="nav"><a href="https://topicpulse.pages.dev/curelog/">Home</a><a href="#">Workouts</a><a href="#">Nutrition</a><a href="#">Goals</a></nav>
 </div></header>
-<div class="filters">
-<span class="pill active">All</span><span class="pill">Nutrition</span><span class="pill">Fitness</span><span class="pill">Mental Health</span><span class="pill">Recipes</span>
-</div>
+<div class="hero-strip"><div class="hero-strip-inner">
+<span class="strip-tag">Fitness</span><span class="strip-tag">Strength</span><span class="strip-tag">Nutrition</span><span class="strip-tag">Recovery</span><span class="strip-tag">HIIT</span>
+</div></div>
 
 <main class="wrap">
 
-<div class="empty"><div class="empty-icon">&#x1F331;</div><h2>Growing Something Good</h2><p>Fresh wellness content coming soon. Check back tomorrow!</p></div>
+<div class="empty"><h2>Train. Eat. Recover.</h2><p>Your fitness content is loading. Check back soon!</p></div>
 
 
 </main>
-<footer>&copy; 2026 CureLog &mdash; Your Wellness Journey Starts Here | <a href="https://topicpulse.pages.dev/curelog/sitemap.xml" style="color:#b7e4c7">Sitemap</a></footer>
+<footer>© 2026 CureLog | <a href="https://topicpulse.pages.dev/curelog/sitemap.xml">Sitemap</a></footer>
 </body></html>

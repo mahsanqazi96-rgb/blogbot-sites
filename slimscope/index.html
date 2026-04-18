@@ -6,65 +6,57 @@
 <title>SlimScope</title>
 <meta name="description" content="Latest health news and analysis from SlimScope.">
 <link rel="canonical" href="https://topicpulse.pages.dev/slimscope">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#fafef7;color:#2c3e50;font-family:'Lato',sans-serif;line-height:1.7}
-a{color:#38a169;text-decoration:none}
-.hdr{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.06);padding:0 24px;position:sticky;top:0;z-index:100}
-.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:800;color:#2d6a4f;display:flex;align-items:center;gap:8px}
-.logo-leaf{font-size:1.3rem}
-.nav a{color:#555;font-size:.82rem;font-weight:700;margin-left:20px;padding:6px 14px;border-radius:20px;transition:background .2s}
-.nav a:hover{background:#d8f3dc;color:#2d6a4f}
-.filters{max-width:1100px;margin:20px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:6px 16px;border-radius:999px;font-size:.78rem;font-weight:700;border:2px solid #d8f3dc;color:#2d6a4f;cursor:pointer;transition:.2s}
-.pill.active,.pill:hover{background:#38a169;color:#fff;border-color:#38a169}
+body{background:#f0f4f8;color:#2d3748;font-family:'Open Sans',sans-serif;line-height:1.7}
+a{color:#48bb78;text-decoration:none}
+.hdr{background:#fff;border-bottom:1px solid #e2e8f0;padding:0 24px}
+.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:'Raleway',sans-serif;font-size:1.4rem;font-weight:800;color:#1a202c;letter-spacing:-0.3px}
+.logo-plus{color:#48bb78;font-size:1.6rem;vertical-align:-2px;margin-right:2px}
+.nav a{color:#718096;font-size:.8rem;font-weight:600;margin-left:16px;transition:.2s}
+.nav a:hover{color:#48bb78}
 .wrap{max-width:1100px;margin:0 auto;padding:28px 24px}
-.section-label{font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:800;color:#38a169;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:"";flex:1;height:2px;background:#d8f3dc;border-radius:1px}
-.hero-card{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(45,106,79,.08);margin-bottom:28px;display:grid;grid-template-columns:1.4fr 1fr}
-@media(max-width:700px){.hero-card{grid-template-columns:1fr}}
-.hero-card img{width:100%;height:100%;min-height:280px;object-fit:cover}
-.hero-card-body{padding:28px}
-.tag-pill{display:inline-block;background:#d8f3dc;color:#2d6a4f;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
-.hero-card h2{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.28;margin-bottom:10px;color:#1a2e1f}
-.hero-card h2 a{color:#1a2e1f}.hero-card h2 a:hover{color:#38a169}
-.hero-card .excerpt{font-size:.88rem;color:#555;line-height:1.6;margin-bottom:14px}
-.read-more{display:inline-flex;align-items:center;gap:6px;background:#38a169;color:#fff;font-size:.8rem;font-weight:700;padding:8px 18px;border-radius:999px;transition:.2s}
-.read-more:hover{background:#2d6a4f;color:#fff}
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:800px){.card-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.card-grid{grid-template-columns:1fr}}
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1)}
-.card img{width:100%;height:180px;object-fit:cover}
+.info-bar{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #48bb78;padding:12px 18px;margin-bottom:28px;border-radius:0 6px 6px 0;font-size:.82rem;color:#718096}
+.info-bar strong{color:#48bb78;font-weight:700}
+.two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-bottom:28px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden}
+.card img{width:100%;height:200px;object-fit:cover}
 .card-body{padding:16px}
-.card .tag-pill{margin-bottom:8px}
-.card h3{font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;line-height:1.3;color:#1a2e1f;margin-bottom:6px}
-.card h3 a{color:#1a2e1f}.card h3 a:hover{color:#38a169}
-.card .date{font-size:.72rem;color:#aaa}
-.empty{text-align:center;padding:80px 20px}
-.empty-icon{font-size:3rem;margin-bottom:12px}
-.empty h2{font-family:'Nunito',sans-serif;font-size:1.4rem;color:#2d6a4f;margin-bottom:8px}
-.empty p{color:#888;font-size:.9rem}
-footer{background:#1a2e1f;color:#b7e4c7;text-align:center;padding:24px;font-size:.78rem;margin-top:60px;border-radius:20px 20px 0 0}
+.badge{display:inline-flex;align-items:center;gap:4px;background:#ebf8f4;color:#48bb78;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.card h3{font-family:'Raleway',sans-serif;font-size:1rem;font-weight:700;line-height:1.3;color:#1a202c;margin-bottom:6px}
+.card h3 a{color:#1a202c}.card h3 a:hover{color:#48bb78}
+.card .date{font-size:.68rem;color:#a0aec0}
+.side-list{display:flex;flex-direction:column;gap:12px}
+.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;display:flex;gap:12px}
+.side-card img{width:70px;height:52px;object-fit:cover;border-radius:4px;flex-shrink:0}
+.side-card h4{font-family:'Raleway',sans-serif;font-size:.88rem;font-weight:700;line-height:1.3;color:#1a202c}
+.side-card h4 a{color:#1a202c}.side-card h4 a:hover{color:#48bb78}
+.side-card .date{font-size:.65rem;color:#a0aec0;margin-top:3px}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+@media(max-width:700px){.three-grid{grid-template-columns:1fr}}
+.sec-h{font-family:'Raleway',sans-serif;font-size:.8rem;font-weight:800;color:#1a202c;text-transform:uppercase;letter-spacing:.1em;margin:24px 0 14px;padding-left:10px;border-left:3px solid #48bb78}
+.empty{text-align:center;padding:70px 20px;background:#fff;border-radius:12px;border:1px solid #e2e8f0}
+.empty h2{font-family:'Raleway',sans-serif;font-size:1.3rem;color:#1a202c;margin-bottom:8px}
+.empty p{color:#a0aec0;font-size:.88rem}
+footer{background:#2d3748;color:#a0aec0;text-align:center;padding:18px;font-size:.72rem;margin-top:48px}
+footer a{color:#48bb78}
 </style></head>
 <body>
 <header class="hdr"><div class="hdr-inner">
-<div class="logo"><span class="logo-leaf">&#x1F33F;</span>SlimScope</div>
-<nav class="nav"><a href="https://topicpulse.pages.dev/slimscope/">Home</a><a href="#">Nutrition</a><a href="#">Fitness</a><a href="#">Wellness</a></nav>
+<div class="logo"><span class="logo-plus">+</span>SlimScope</div>
+<nav class="nav"><a href="https://topicpulse.pages.dev/slimscope/">Home</a><a href="#">Wellness</a><a href="#">Research</a><a href="https://topicpulse.pages.dev/slimscope/sitemap.xml">Sitemap</a></nav>
 </div></header>
-<div class="filters">
-<span class="pill active">All</span><span class="pill">Nutrition</span><span class="pill">Fitness</span><span class="pill">Mental Health</span><span class="pill">Recipes</span>
-</div>
 
 <main class="wrap">
+<div class="info-bar"><strong>Evidence-based</strong> — All content reviewed for accuracy and medical relevance.</div>
 
-<div class="empty"><div class="empty-icon">&#x1F331;</div><h2>Growing Something Good</h2><p>Fresh wellness content coming soon. Check back tomorrow!</p></div>
+<div class="empty"><h2>Content Loading</h2><p>Evidence-based health content launching soon.</p></div>
 
 
 </main>
-<footer>&copy; 2026 SlimScope &mdash; Your Wellness Journey Starts Here | <a href="https://topicpulse.pages.dev/slimscope/sitemap.xml" style="color:#b7e4c7">Sitemap</a></footer>
+<footer>© 2026 SlimScope | <a href="https://topicpulse.pages.dev/slimscope/sitemap.xml">Sitemap</a></footer>
 </body></html>

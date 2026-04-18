@@ -6,64 +6,50 @@
 <title>ByteScope</title>
 <meta name="description" content="Latest tech news and analysis from ByteScope.">
 <link rel="canonical" href="https://topicpulse.pages.dev/bytescope">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;color:#1a1a1a;font-family:'Inter',sans-serif;line-height:1.65}
+body{background:#0a0e1a;color:#8892a4;font-family:'Inter',sans-serif;line-height:1.7}
 a{color:#ff4500;text-decoration:none}
-.hdr{background:#000;padding:0 24px;position:sticky;top:0;z-index:100}
-.hdr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-1px;text-transform:uppercase}
-.logo em{color:#ff4500;font-style:normal}
-.nav a{color:rgba(255,255,255,.7);font-size:.8rem;font-weight:600;margin-left:20px;text-transform:uppercase;letter-spacing:.05em;transition:.2s}
+.hdr{background:#060810;border-bottom:1px solid #1c2333;padding:0 24px}
+.hdr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:'Fira Code',monospace;font-size:1.2rem;font-weight:600;color:#ff4500}
+.logo-bracket{color:#4a5568}
+.nav a{color:#4a5568;font-family:'Fira Code',monospace;font-size:.72rem;margin-left:18px;transition:.2s}
 .nav a:hover{color:#ff4500}
-.accent-line{height:4px;background:linear-gradient(90deg,#ff4500,#ff8c00,#ffd700)}
-.cat-tabs{background:#f5f5f5;border-bottom:1px solid #e5e5e5;padding:0 24px}
-.cat-tabs-inner{max-width:1200px;margin:0 auto;display:flex;gap:0;overflow-x:auto}
-.cat-tab{padding:10px 18px;font-size:.78rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.07em;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer;transition:.2s}
-.cat-tab:hover,.cat-tab.active{color:#ff4500;border-bottom-color:#ff4500}
+.term-bar{background:#060810;border-bottom:1px solid #1c2333;padding:6px 24px;font-family:'Fira Code',monospace;font-size:.68rem;color:#3d4f6b}
+.term-bar span{color:#ff4500}
 .wrap{max-width:1200px;margin:0 auto;padding:28px 24px}
-.hero-full{display:grid;grid-template-columns:1.6fr 1fr;gap:0;margin-bottom:32px;background:#000;min-height:380px}
-@media(max-width:700px){.hero-full{grid-template-columns:1fr}}
-.hero-full img{width:100%;height:100%;min-height:300px;object-fit:cover;opacity:.9}
-.hero-full-body{padding:28px;display:flex;flex-direction:column;justify-content:flex-end}
-.hero-cat{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;color:#ff4500;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px}
-.hero-full h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;line-height:1.1;color:#fff;margin-bottom:10px;text-transform:uppercase}
-.hero-full h2 a{color:#fff}.hero-full h2 a:hover{color:#ff4500}
-.hero-date{font-size:.72rem;color:#aaa}
-.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media(max-width:900px){.tech-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.tech-grid{grid-template-columns:1fr}}
-.tech-card{transition:transform .2s}
-.tech-card:hover{transform:translateY(-4px)}
-.tech-card img{width:100%;height:160px;object-fit:cover;margin-bottom:10px}
-.tech-card .cat{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;color:#ff4500;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
-.tech-card h3{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.2;text-transform:uppercase;color:#1a1a1a}
-.tech-card h3 a{color:#1a1a1a}.tech-card h3 a:hover{color:#ff4500}
-.tech-card .date{font-size:.68rem;color:#aaa;margin-top:6px}
-.sec-title{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;padding-left:12px;border-left:4px solid #ff4500;color:#1a1a1a}
-.empty{text-align:center;padding:80px 20px}
-.empty h2{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px}
-.empty p{color:#888}
-footer{background:#000;color:#666;text-align:center;padding:20px;font-size:.75rem;margin-top:50px}
-footer a{color:#ff4500}
+.file-header{font-family:'Fira Code',monospace;font-size:.7rem;color:#3d4f6b;margin-bottom:16px;padding:6px 10px;background:#0d1220;border-left:2px solid #ff4500}
+.file-header span{color:#ff4500}
+.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:700px){.post-grid{grid-template-columns:1fr}}
+.post-card{background:#0d1220;border:1px solid #1c2333;border-radius:4px;overflow:hidden;transition:border-color .2s}
+.post-card:hover{border-color:#ff4500}
+.post-card img{width:100%;height:170px;object-fit:cover;opacity:.8}
+.post-card-body{padding:14px}
+.func-name{font-family:'Fira Code',monospace;font-size:.65rem;color:#ff4500;margin-bottom:6px}
+.post-card h3{font-size:.95rem;font-weight:600;line-height:1.35;color:#c9d1d9;margin-bottom:6px}
+.post-card h3 a{color:#c9d1d9}.post-card h3 a:hover{color:#ff4500}
+.post-card .meta{font-family:'Fira Code',monospace;font-size:.62rem;color:#3d4f6b}
+.empty{text-align:center;padding:70px 20px;color:#3d4f6b}
+.empty pre{font-family:'Fira Code',monospace;font-size:.88rem;color:#ff4500;margin-bottom:12px}
+footer{border-top:1px solid #1c2333;margin-top:50px;padding:18px 24px;text-align:center;font-family:'Fira Code',monospace;font-size:.68rem;color:#3d4f6b}
 </style></head>
 <body>
 <header class="hdr"><div class="hdr-inner">
-<div class="logo">BYTE<em>SCOPE</em></div>
-<nav class="nav"><a href="https://topicpulse.pages.dev/bytescope/">Home</a><a href="#">Reviews</a><a href="#">AI</a><a href="#">Gadgets</a></nav>
+<div class="logo"><span class="logo-bracket">{"</span>ByteScope<span class="logo-bracket">"}</span></div>
+<nav class="nav"><a href="https://topicpulse.pages.dev/bytescope/">~/home</a><a href="#">/posts</a><a href="https://topicpulse.pages.dev/bytescope/sitemap.xml">/sitemap</a></nav>
 </div></header>
-<div class="accent-line"></div>
-<div class="cat-tabs"><div class="cat-tabs-inner">
-<div class="cat-tab active">All</div><div class="cat-tab">AI</div><div class="cat-tab">Gadgets</div><div class="cat-tab">Apps</div><div class="cat-tab">Science</div><div class="cat-tab">Reviews</div>
-</div></div>
+<div class="term-bar">$ <span>fetch</span> --latest --source bytescope --format json | render</div>
 
 <main class="wrap">
 
-<div class="empty"><h2>Content Loading</h2><p>First tech articles arriving soon. Stay tuned.</p></div>
+<div class="empty"><pre>$ loading articles...
+→ no results yet</pre><p>First articles deploying. Run again soon.</p></div>
 
 
 </main>
-<footer>&copy; 2026 ByteScope | <a href="https://topicpulse.pages.dev/bytescope/sitemap.xml">Sitemap</a></footer>
+<footer>// © 2026 ByteScope — all rights reserved</footer>
 </body></html>

@@ -6,63 +6,56 @@
 <title>BuzzLog</title>
 <meta name="description" content="Latest entertainment news and analysis from BuzzLog.">
 <link rel="canonical" href="https://topicpulse.pages.dev/buzzlog">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#f7f7f7;color:#1a1a1a;font-family:'Open Sans',sans-serif;line-height:1.65}
-a{color:#e31c5f;text-decoration:none}
-.hdr{background:#e31c5f;padding:0 24px;position:sticky;top:0;z-index:100}
-.hdr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-1px}
-.nav a{color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;margin-left:18px;text-transform:uppercase;transition:.2s}
-.nav a:hover{color:#fff}
-.trending-bar{background:#1a1a1a;color:#fff;padding:8px 24px;display:flex;align-items:center;gap:12px}
-.trending-label{background:#e31c5f;color:#fff;font-family:'Oswald',sans-serif;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:3px;text-transform:uppercase;white-space:nowrap}
-.trending-items{display:flex;gap:16px;overflow:hidden;font-size:.78rem;color:#ccc}
-.wrap{max-width:1200px;margin:0 auto;padding:24px}
-.sec-hdr{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:#1a1a1a;padding:8px 14px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.sec-hdr::before{content:"&#x25CF;";color:#e31c5f}
-.big-card{background:#fff;border-radius:8px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
-.big-card img{width:100%;height:360px;object-fit:cover}
-.big-card-body{padding:20px}
-.badge{display:inline-block;background:#e31c5f;color:#fff;font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.big-card h2{font-family:'Oswald',sans-serif;font-size:1.7rem;font-weight:700;line-height:1.2;text-transform:uppercase;color:#1a1a1a;margin-bottom:6px}
-.big-card h2 a{color:#1a1a1a}.big-card h2 a:hover{color:#e31c5f}
-.big-card .meta{font-size:.72rem;color:#888}
-.img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:700px){.img-grid{grid-template-columns:1fr}}
-.img-card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .2s}
-.img-card:hover{transform:translateY(-3px)}
-.img-card-thumb{position:relative;overflow:hidden}
-.img-card img{width:100%;height:200px;object-fit:cover;transition:transform .3s}
-.img-card:hover img{transform:scale(1.04)}
-.hot-badge{position:absolute;top:8px;left:8px;background:#e31c5f;color:#fff;font-family:'Oswald',sans-serif;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase}
-.img-card-body{padding:12px}
-.img-card h3{font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:600;line-height:1.25;text-transform:uppercase;color:#1a1a1a;margin-bottom:4px}
-.img-card h3 a{color:#1a1a1a}.img-card h3 a:hover{color:#e31c5f}
-.img-card .date{font-size:.68rem;color:#aaa}
-.empty{text-align:center;padding:80px 20px;background:#fff;border-radius:12px}
-.empty h2{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:700;text-transform:uppercase;color:#e31c5f;margin-bottom:8px}
-footer{background:#1a1a1a;color:#888;text-align:center;padding:20px;font-size:.75rem;margin-top:40px}
-footer a{color:#e31c5f}
+body{background:#fffde7;color:#111;font-family:'Open Sans',sans-serif;line-height:1.6}
+a{color:#ff6b6b;text-decoration:none}
+.hdr{background:#111;padding:0 16px}
+.hdr-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:8px 0}
+.logo{font-family:'Anton',sans-serif;font-size:2rem;color:#ff6b6b;letter-spacing:1px;text-transform:uppercase;line-height:1}
+.logo-sub{font-size:.55rem;color:#999;letter-spacing:.2em;text-transform:uppercase;margin-top:2px}
+.nav a{color:#888;font-size:.78rem;font-weight:700;margin-left:16px;text-transform:uppercase;letter-spacing:.06em}
+.nav a:hover{color:#ff6b6b}
+.flash-bar{background:#ff6b6b;padding:7px 16px;display:flex;align-items:center;gap:12px;overflow:hidden}
+.flash-label{background:#111;color:#ff6b6b;font-family:'Anton',sans-serif;font-size:.7rem;padding:2px 8px;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}
+.flash-text{font-size:.75rem;font-weight:700;color:#111}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px}
+.big-story{background:#111;color:#fff;border-radius:4px;overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr;margin-bottom:20px}
+@media(max-width:700px){.big-story{grid-template-columns:1fr}}
+.big-story img{width:100%;height:100%;min-height:280px;object-fit:cover}
+.big-body{padding:20px}
+.scream{font-family:'Anton',sans-serif;font-size:1.8rem;line-height:1.05;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:10px}
+.scream a{color:#fff}.scream a:hover{color:#ff6b6b}
+.kicker{background:#ff6b6b;color:#111;font-family:'Anton',sans-serif;font-size:.65rem;padding:2px 8px;display:inline-block;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.big-meta{font-size:.7rem;color:#888;margin-top:10px}
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.story-grid{grid-template-columns:1fr}}
+.story{background:#fff;border:2px solid #111;border-radius:2px;overflow:hidden;transition:border-color .2s}
+.story:hover{border-color:#ff6b6b}
+.story img{width:100%;height:170px;object-fit:cover}
+.story-body{padding:10px}
+.story h3{font-family:'Anton',sans-serif;font-size:1.05rem;text-transform:uppercase;letter-spacing:-0.3px;line-height:1.15;color:#111}
+.story h3 a{color:#111}.story h3 a:hover{color:#ff6b6b}
+.story .meta{font-size:.65rem;color:#888;margin-top:6px}
+.empty{text-align:center;padding:70px 20px;background:#fff;border:2px solid #111}
+.empty h2{font-family:'Anton',sans-serif;font-size:1.8rem;text-transform:uppercase;color:#111;margin-bottom:8px}
+footer{background:#111;color:#555;text-align:center;padding:16px;font-size:.72rem;margin-top:24px}
+footer a{color:#ff6b6b}
 </style></head>
 <body>
 <header class="hdr"><div class="hdr-inner">
-<div class="logo">BuzzLog</div>
-<nav class="nav"><a href="https://topicpulse.pages.dev/buzzlog/">Home</a><a href="#">Celebs</a><a href="#">Viral</a><a href="#">Trending</a></nav>
+<div><div class="logo">BuzzLog</div><div class="logo-sub">Breaking Every Day</div></div>
+<nav class="nav"><a href="https://topicpulse.pages.dev/buzzlog/">Home</a><a href="#">Gossip</a><a href="#">Scandals</a></nav>
 </div></header>
-<div class="trending-bar">
-<span class="trending-label">&#x1F525; Trending</span>
-<div class="trending-items">
-<span>BuzzLog goes viral</span><span>Hot takes daily</span><span>Celebrity news 24/7</span>
-</div></div>
+<div class="flash-bar"><span class="flash-label">Breaking</span><span class="flash-text">BuzzLog — The hottest stories updated daily</span></div>
 
 <main class="wrap">
 
-<div class="empty"><h2>&#x1F3AC; Show Starting Soon</h2><p>The hottest content is loading. Check back soon!</p></div>
+<div class="empty"><h2>Breaking Soon!</h2><p>Hot stories loading. Reload in a few hours.</p></div>
 
 
 </main>
-<footer>&copy; 2026 BuzzLog | <a href="https://topicpulse.pages.dev/buzzlog/sitemap.xml">Sitemap</a></footer>
+<footer>© 2026 BuzzLog | <a href="https://topicpulse.pages.dev/buzzlog/sitemap.xml">Sitemap</a></footer>
 </body></html>
