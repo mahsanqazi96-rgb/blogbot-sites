@@ -2,14 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://site-001.pages.dev/</loc>
-    <lastmod>2026-04-15</lastmod>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://site-001.pages.dev/posts/understanding-bitcoin-etf.html</loc>
-    <lastmod>2026-04-15</lastmod>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/ethereum-vs-bitcoin-price-analysis.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/importance-of-safe-crypto-storage.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/introduction-to-bitcoin-and-cryptocurrency.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/introduction-to-blockchain-technology.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/price-analysis-and-market-impact.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/price-analysis.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/cryptoinsiderdaily/posts/understanding-bitcoin-etf.html</loc>
+    <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

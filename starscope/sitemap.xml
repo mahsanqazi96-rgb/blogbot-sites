@@ -2,9 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blogbot-sites.pages.dev/sites/site-082/</loc>
-    <lastmod>2026-04-16</lastmod>
+    <loc>https://topicpulse.pages.dev/starscope/</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/starscope/posts/best-youtube-channels-worth-subscribing-to.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/starscope/posts/most-followed-celebrities-on-instagram-right-now.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

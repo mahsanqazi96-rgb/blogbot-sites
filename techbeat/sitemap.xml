@@ -2,9 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blogbot-sites.pages.dev/sites/site-061/</loc>
-    <lastmod>2026-04-16</lastmod>
+    <loc>https://topicpulse.pages.dev/techbeat/</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/techbeat/posts/best-wireless-earbuds-under-50-a-beginners-guide.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://topicpulse.pages.dev/techbeat/posts/how-to-fix-common-wi-fi-problems-a-comprehensive-guide.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
