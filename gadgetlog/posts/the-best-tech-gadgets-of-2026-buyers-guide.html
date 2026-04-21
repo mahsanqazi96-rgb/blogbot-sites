@@ -828,7 +828,7 @@ main{padding:0 0 80px}
 
   // Category nav
   var CATS={finance:['Markets','Investing','Economy','Crypto','Personal Finance'],crypto:['Bitcoin','Ethereum','DeFi','NFTs','Markets','Web3'],health:['Nutrition','Fitness','Wellness','Medical','Mental Health'],tech:['AI','Gadgets','Software','Science','Cybersecurity'],entertainment:['Movies','Celebrity','Music','Sports','TV']};
-  var cats=CATS.tech;
+  var cats=CATS['tech']||CATS.tech;
   var nav=document.getElementById('catNavInner');
   if(nav){
     cats.forEach(function(c){
