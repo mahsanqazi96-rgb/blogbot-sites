@@ -51,8 +51,8 @@ class OneSignalPusher:
     api_key : OneSignal REST API Key (same page, "REST API Key")
     """
 
-    _NOTIFICATIONS_URL = "https://api.onesignal.com/notifications"
-    _APPS_URL          = "https://api.onesignal.com/apps/{app_id}"
+    _NOTIFICATIONS_URL = "https://onesignal.com/api/v1/notifications"
+    _APPS_URL          = "https://onesignal.com/api/v1/apps/{app_id}"
     _TIMEOUT           = 30  # seconds
 
     def __init__(self, app_id: str, api_key: str) -> None:
