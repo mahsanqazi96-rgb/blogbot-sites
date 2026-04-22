@@ -3,19 +3,25 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://topicpulse.pages.dev/apppulse/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://topicpulse.pages.dev/apppulse/posts/choosing-the-right-router.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://topicpulse.pages.dev/apppulse/posts/best-vpn-services-which-one-to-choose.html</loc>
-    <lastmod>2026-04-01</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://topicpulse.pages.dev/apppulse/posts/smart-home-devices-worth-buying.html</loc>
-    <lastmod>2026-04-01</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
