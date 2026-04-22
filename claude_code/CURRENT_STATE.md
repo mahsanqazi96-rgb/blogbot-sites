@@ -6,8 +6,15 @@
 ## CURRENT STATUS
 
 Build Phase: ALL PHASES COMPLETE ✅ + BOT RUNNING ✅ + 225 POSTS LIVE ✅ + ADS ACTIVE ✅ + CF ANALYTICS LIVE ✅ + 5 TRAFFIC SOURCES LIVE ✅
-Last Completed: SESSION-037 — 5 non-social traffic modules + OneSignal SDK injection + directory submission on blog creation (2026-04-23)
-Currently Working On: SESSION-038 — 8 ready-made traffic tools integration (Postiz, Telegram, Bluesky, Discord, listmonk, GitHub Actions, Pinterest, Nostr)
+Last Completed: SESSION-038 — All 16 traffic tools researched, documented, saved as TODOs (2026-04-23)
+Currently Working On: PAUSED — weekly API limit reached. Resume next session.
+
+⚡ NEXT SESSION INSTRUCTIONS FOR CLAUDE:
+  1. Read claude_code/TRAFFIC_TOOLS.md first (has all 16 tools + exact implementation plan)
+  2. Build the 3 zero-setup tools immediately (Nostr, pywebpush, indexnow GH Action)
+  3. Build RSS feed generation (required by all other tools)
+  4. Create all GitHub Actions workflows + Docker configs + third_party/ folder
+  5. Then tell user exactly what accounts/credentials are needed — they will provide what they can
 
 LIVE NETWORK: https://topicpulse.pages.dev
   - Root hub page: 100 blogs with descriptions, niche filter, search bar

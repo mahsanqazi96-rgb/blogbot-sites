@@ -36,6 +36,9 @@ Phase: 8 READY-MADE TRAFFIC TOOLS INTEGRATION
 | 15 | indexnow-action | bojieyang/indexnow-action | ★200 | GH Action | Nothing ✅ | Build now |
 | 16 | feed-to-social-media | lwojcik/github-action-feed-to-social-media | ★150 | GH Action | Multi-platform | Waiting |
 
+### Session ended: weekly API limit reached — resume next session
+### Next session: read TRAFFIC_TOOLS.md → implement everything → ask user for credentials
+
 ### Files to create:
 - modules/rss_generator.py (new) — generate feed.xml per blog
 - .github/workflows/indexnow.yml (new)
