@@ -3,6 +3,71 @@
 
 ---
 
+## SESSION-038
+Date: 2026-04-23
+Phase: 8 READY-MADE TRAFFIC TOOLS INTEGRATION
+
+### Goals (this session):
+1. Add RSS feed generation (feed.xml) to every blog — required by all downstream tools
+2. GitHub Actions: indexnow-action, blueskyfeedbot, github-action-feed-to-social-media
+3. Docker configs: Postiz (28 platforms), MonitoRSS (Discord), listmonk (email newsletter)
+4. Python bots: BoKKeR RSS-to-Telegram-Bot, Skywrite (Bluesky), PinterestBulkPostBot
+5. bot_loop.py hooks: Postiz API call + listmonk API call after every post publish
+6. third_party/ folder structure for all cloned repos
+7. master TRAFFIC_TOOLS.md reference document
+
+### All 16 tools being integrated:
+| # | Tool | GitHub | Stars | Type | Needs | Status |
+|---|------|--------|-------|------|-------|--------|
+| 1 | Telegram publisher | python-telegram-bot/python-telegram-bot | ★29k | Python module | Bot token | Waiting |
+| 2 | Bluesky publisher | MarshalX/atproto | ★646 | Python module | Account | Waiting |
+| 3 | Mastodon publisher | halcy/Mastodon.py | ★946 | Python module | Account | Waiting |
+| 4 | Reddit submitter | praw-dev/praw | ★4,100 | Python module | Aged accounts | Waiting |
+| 5 | Nostr publisher | rust-nostr/nostr | — | Python module | Nothing ✅ | Build now |
+| 6 | pywebpush (own push) | web-push-libs/pywebpush | ★366 | Python module | Nothing ✅ | Build now |
+| 7 | Postiz | gitroomhq/postiz-app | ★28,400 | Docker | Docker + accounts | Waiting |
+| 8 | RSS-to-Telegram-Bot | BoKKeR/RSS-to-Telegram-Bot | ★500 | Python script | Bot token | Waiting |
+| 9 | blueskyfeedbot | joschi/blueskyfeedbot | ★200 | GH Action | Bluesky account | Waiting |
+| 10 | MonitoRSS | synzen/MonitoRSS | ★1,200 | Docker | Discord bot | Waiting |
+| 11 | FeedCord | Qolors/FeedCord | ★256 | Docker | Discord webhook | Waiting |
+| 12 | listmonk | knadh/listmonk | ★19,500 | Docker | SMTP | Waiting |
+| 13 | Skywrite | Blooym/skywrite | — | Python script | Bluesky | Waiting |
+| 14 | PinterestBulkPostBot | SoCloseSociety/PinterestBulkPostBot | — | Python/Selenium | Pinterest login | Build now |
+| 15 | indexnow-action | bojieyang/indexnow-action | ★200 | GH Action | Nothing ✅ | Build now |
+| 16 | feed-to-social-media | lwojcik/github-action-feed-to-social-media | ★150 | GH Action | Multi-platform | Waiting |
+
+### Files to create:
+- modules/rss_generator.py (new) — generate feed.xml per blog
+- .github/workflows/indexnow.yml (new)
+- .github/workflows/bluesky-rss.yml (new)
+- .github/workflows/multi-social.yml (new)
+- third_party/postiz/docker-compose.yml (new)
+- third_party/postiz/.env.example (new)
+- third_party/monitorrss/docker-compose.yml (new)
+- third_party/monitorrss/config.json.example (new)
+- third_party/listmonk/docker-compose.yml (new)
+- third_party/listmonk/config.toml.example (new)
+- third_party/rss-to-telegram/config.ini.example (new)
+- third_party/rss-to-telegram/START_TELEGRAM_BOT.bat (new)
+- third_party/skywrite/config.toml.example (new)
+- third_party/pinterest-bot/generate_csv.py (new)
+- claude_code/TRAFFIC_TOOLS.md (new)
+- modules/static_site_generator.py (modified — add generate_rss_feed())
+- bot_loop.py (modified — call Postiz API + listmonk API + generate feed.xml)
+- claude_code/SETUP_ACCOUNTS.md (new — step-by-step account creation guide)
+
+### Accounts user needs to create (blocking some tools):
+- Telegram: BotFather bot token + 5 niche channel IDs
+- Bluesky: handle + app password at bsky.app
+- Discord: bot token + channel IDs at discord.com/developers
+- Mastodon: access token at mastodon.social
+- Docker Desktop: https://www.docker.com/products/docker-desktop/
+- Brevo SMTP: free at brevo.com (300 emails/day, for listmonk)
+
+### GitHub commits: (to be filled after build)
+
+---
+
 ## SESSION-037
 Date: 2026-04-23
 Phase: 5 NON-SOCIAL TRAFFIC MODULES + ONESIGNAL SDK INJECTION + DIRECTORY SUBMISSION HOOK

@@ -7,7 +7,7 @@
 
 Build Phase: ALL PHASES COMPLETE ✅ + BOT RUNNING ✅ + 225 POSTS LIVE ✅ + ADS ACTIVE ✅ + CF ANALYTICS LIVE ✅ + 5 TRAFFIC SOURCES LIVE ✅
 Last Completed: SESSION-037 — 5 non-social traffic modules + OneSignal SDK injection + directory submission on blog creation (2026-04-23)
-Currently Working On: Network growing autonomously
+Currently Working On: SESSION-038 — 8 ready-made traffic tools integration (Postiz, Telegram, Bluesky, Discord, listmonk, GitHub Actions, Pinterest, Nostr)
 
 LIVE NETWORK: https://topicpulse.pages.dev
   - Root hub page: 100 blogs with descriptions, niche filter, search bar
@@ -71,13 +71,120 @@ HOW TO START BOT (FOR CONTINUOUS RUNNING):
   python bot_loop.py         ← alternative CLI start
   python bot_loop.py --once  ← single cycle only
 
-TO-DO (user action needed):
+TO-DO (user action needed — accounts to create):
   1. PopAds: still awaiting approval — check dashboard
-  2. Run setup_traffic_keys.py ONCE to enter: OneSignal App ID + REST key, Medium token, CryptoPanic token
-     → then all 3 activate automatically on every post publish, forever
-  3. Adsterra/Monetag/PopAds API keys: provide for revenue tracking in dashboard
-  4. Register Cloudflare accounts 2-5 for scale to 500 blogs total
-  5. Twitter/Pinterest/Tumblr: optional — provide API keys when ready for social traffic
+  2. Adsterra/Monetag/PopAds API keys: provide for revenue tracking in dashboard
+  3. Register Cloudflare accounts 2-5 for scale to 500 blogs total
+  4. [SESSION-038] Create Telegram bot via BotFather + 5 niche channels → give Claude the bot token + channel IDs
+  5. [SESSION-038] Create Bluesky account at bsky.app → give Claude handle + app password
+  6. [SESSION-038] Create Discord server + bot at discord.com/developers → give Claude bot token + channel IDs
+  7. [SESSION-038] Create Mastodon account at mastodon.social → give Claude access token
+  8. [SESSION-038] Install Docker Desktop on Windows → https://www.docker.com/products/docker-desktop/ (needed for Postiz + MonitoRSS + listmonk)
+  9. [SESSION-038] Create Brevo account (free SMTP) at brevo.com → give Claude SMTP credentials (for listmonk)
+
+SESSION-038 TRAFFIC TOOLS — BUILD STATUS:
+  ── PREREQUISITE ─────────────────────────────────────────────────────────────
+  [ ] RSS feed generation — add feed.xml to every blog (required by ALL tools below)
+      File: modules/static_site_generator.py + bot_loop.py
+
+  ── GITHUB ACTIONS (zero infra — run free in GitHub) ─────────────────────────
+  [ ] indexnow-action — submits all URLs to Bing/Yandex on every git push
+      File: .github/workflows/indexnow.yml
+      Needs: IndexNow key already in repo (✅ already have it)
+      Status: READY TO BUILD — no account needed
+
+  [ ] blueskyfeedbot — posts every new RSS item to Bluesky automatically
+      File: .github/workflows/bluesky-rss.yml
+      Needs: Bluesky handle + app password as GitHub secrets
+      Status: WAITING FOR ACCOUNT (#5 above)
+
+  [ ] github-action-feed-to-social-media — posts to Mastodon+Bluesky+Discord+Slack at once
+      File: .github/workflows/multi-social.yml
+      Needs: Platform credentials as GitHub secrets
+      Status: WAITING FOR ACCOUNTS (#5, #6, #7 above)
+
+  ── DOCKER SERVICES (run on your Windows machine 24/7) ───────────────────────
+  [ ] Postiz — self-hosted social dashboard (28 platforms, web UI, API)
+      Files: third_party/postiz/docker-compose.yml + .env
+      Needs: Docker Desktop + platform credentials
+      Status: WAITING FOR DOCKER (#8 above)
+      Bot hook: bot_loop.py calls Postiz API after each post publish
+
+  [ ] MonitoRSS — Discord RSS bot (gold standard, 1,200★)
+      Files: third_party/monitorrss/docker-compose.yml + config.json
+      Needs: Docker Desktop + Discord bot token
+      Status: WAITING FOR DOCKER + DISCORD (#6, #8 above)
+
+  [ ] listmonk — self-hosted email newsletter (19,500★)
+      Files: third_party/listmonk/docker-compose.yml + config.toml
+      Needs: Docker Desktop + SMTP credentials (Brevo free)
+      Status: WAITING FOR DOCKER + SMTP (#8, #9 above)
+
+  ── PYTHON MODULES (built into bot, fire on every post publish) ──────────────
+  [ ] Telegram publisher — python-telegram-bot (★29k) — posts to 5 niche channels
+      File: modules/telegram_publisher.py (NEW)
+      Impact: 🔥🔥🔥🔥 Very High — 900M users, zero algorithm suppression
+      Needs: Bot token + 5 channel IDs (#4 above)
+      Status: WAITING FOR TELEGRAM SETUP
+      Bot hook: _fire_traffic_signals() in bot_loop.py
+
+  [ ] Bluesky publisher — atproto (★646) — posts to Bluesky on every publish
+      File: modules/bluesky_publisher.py (NEW)
+      Impact: 🔥🔥🔥 High — 35M users, no link suppression
+      Needs: Bluesky handle + app password (#5 above)
+      Status: WAITING FOR BLUESKY ACCOUNT
+      Bot hook: _fire_traffic_signals() in bot_loop.py
+
+  [ ] Mastodon publisher — Mastodon.py (★946) — posts to Fediverse
+      File: modules/mastodon_publisher.py (NEW)
+      Impact: 🔥🔥 Medium — federates across thousands of instances
+      Needs: Mastodon access token (#7 above)
+      Status: WAITING FOR MASTODON ACCOUNT
+      Bot hook: _fire_traffic_signals() in bot_loop.py
+
+  [ ] Reddit submitter — PRAW (★4,100) — submits to niche subreddits
+      File: modules/reddit_publisher.py (NEW)
+      Impact: 🔥🔥🔥🔥 Very High — highest RPM referral source
+      Needs: Reddit API credentials + aged accounts (30+ days old)
+      Status: WAITING FOR REDDIT ACCOUNTS (need karma before link posting)
+      Bot hook: _fire_traffic_signals() in bot_loop.py
+      Note: Create Reddit accounts NOW — they need 30 days to age before use
+
+  [ ] Nostr publisher — nostr-sdk (pip install nostr-sdk) — decentralised posts
+      File: modules/nostr_publisher.py (NEW)
+      Impact: 🔥 Low-Medium — good for crypto/finance content, no bans ever
+      Needs: NO ACCOUNT — generates keypair automatically
+      Status: ✅ CAN BUILD NOW — zero setup required
+      Bot hook: _fire_traffic_signals() in bot_loop.py
+
+  [ ] pywebpush — own web push, no OneSignal dependency
+      File: modules/webpush_publisher.py (NEW)
+      Impact: 🔥🔥🔥 High (long-term, builds owned subscriber list)
+      Needs: NO ACCOUNT — VAPID keys auto-generated
+      Status: ✅ CAN BUILD NOW — subscriber widget added to templates
+      Bot hook: fires on every post, sends to all stored subscriber endpoints
+
+  ── PYTHON SCRIPTS (run alongside bot, no Docker needed) ─────────────────────
+  [ ] BoKKeR RSS-to-Telegram-Bot — posts RSS feed to Telegram channels
+      Files: third_party/rss-to-telegram/ (cloned repo + config)
+      Needs: Telegram bot token + channel IDs
+      Status: WAITING FOR TELEGRAM SETUP (#4 above)
+
+  [ ] Skywrite (Bluesky RSS bot) — backup Bluesky poster
+      Files: third_party/skywrite/ (cloned + config.toml)
+      Needs: Bluesky handle + app password
+      Status: WAITING FOR BLUESKY (#5 above)
+
+  [ ] PinterestBulkPostBot — bulk pin scheduler (Selenium-based)
+      Files: third_party/pinterest-bot/ (cloned + CSV generator module)
+      Needs: Pinterest account credentials
+      Status: CAN BUILD NOW (creates CSV from RSS, runs when user provides login)
+
+  [ ] FeedCord — Discord RSS bot via webhook (★256, no coding needed)
+      Files: third_party/feedcord/docker-compose.yml + config.json
+      Impact: 🔥🔥 Medium — Discord niche communities (crypto/tech/finance)
+      Needs: Discord webhook URL (simpler than full bot — just a URL)
+      Status: WAITING FOR DISCORD WEBHOOK URL (#6 above)
 
 ---
 
