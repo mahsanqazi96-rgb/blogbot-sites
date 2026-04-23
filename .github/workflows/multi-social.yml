@@ -1,0 +1,135 @@
+# BlogBot — Multi-Platform Social Poster
+# Fires on every push to main and distributes new posts to:
+#   - Mastodon (via mastodon-post action)
+#   - Discord (via discord-webhook)
+# Also runs on schedule to catch any missed pushes.
+#
+# Required GitHub Secrets:
+#   MASTODON_INSTANCE_URL   — e.g. https://mastodon.social
+#   MASTODON_ACCESS_TOKEN   — from Settings → Development → New Application
+#   DISCORD_WEBHOOK_URL     — from Discord channel → Edit → Integrations → Webhooks
+#
+# Optional:
+#   SLACK_WEBHOOK_URL       — Slack incoming webhook for team notifications
+
+name: Multi-Platform Social Poster
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sites/*/posts/**"
+      - "feed.xml"
+
+  schedule:
+    # Run hourly as a backup catch
+    - cron: "0 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 1. Parse the latest RSS item from the hub feed
+  # ─────────────────────────────────────────────────────────────────────────────
+  parse-feed:
+    name: Parse latest post from hub feed
+    runs-on: ubuntu-latest
+    outputs:
+      post_title: ${{ steps.parse.outputs.title }}
+      post_url:   ${{ steps.parse.outputs.url }}
+      post_desc:  ${{ steps.parse.outputs.description }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse latest item from feed.xml
+        id: parse
+        run: |
+          FEED="feed.xml"
+          if [ ! -f "$FEED" ]; then
+            echo "feed.xml not found — skipping"
+            echo "title=" >> "$GITHUB_OUTPUT"
+            echo "url=" >> "$GITHUB_OUTPUT"
+            echo "description=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Extract first <item> block
+          TITLE=$(grep -m1 '<title>' "$FEED" | sed 's/.*<title>//;s/<\/title>//' | sed 's/<!\[CDATA\[//;s/\]\]>//' | head -c 280)
+          URL=$(grep -m1 '<link>' "$FEED" | sed 's/.*<link>//;s/<\/link>//' | xargs)
+          DESC=$(grep -m1 '<description>' "$FEED" | sed 's/.*<description>//;s/<\/description>//' | sed 's/<!\[CDATA\[//;s/\]\]>//' | head -c 200)
+
+          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "description=$DESC" >> "$GITHUB_OUTPUT"
+
+          echo "Parsed: $TITLE"
+          echo "URL: $URL"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 2. Post to Mastodon
+  # ─────────────────────────────────────────────────────────────────────────────
+  post-mastodon:
+    name: Post to Mastodon
+    runs-on: ubuntu-latest
+    needs: parse-feed
+    if: needs.parse-feed.outputs.post_url != ''
+
+    steps:
+      - name: Post to Mastodon
+        uses: cbrgm/mastodon-github-action@v2
+        with:
+          message: |
+            📰 ${{ needs.parse-feed.outputs.post_title }}
+
+            ${{ needs.parse-feed.outputs.post_desc }}
+
+            🔗 ${{ needs.parse-feed.outputs.post_url }}
+
+            #tech #news #blogging
+          url:         ${{ secrets.MASTODON_INSTANCE_URL }}
+          access-token: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 3. Post to Discord via webhook
+  # ─────────────────────────────────────────────────────────────────────────────
+  post-discord:
+    name: Post to Discord
+    runs-on: ubuntu-latest
+    needs: parse-feed
+    if: needs.parse-feed.outputs.post_url != ''
+
+    steps:
+      - name: Send Discord notification
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          nodetail: true
+          title: ${{ needs.parse-feed.outputs.post_title }}
+          description: |
+            ${{ needs.parse-feed.outputs.post_desc }}
+
+            🔗 ${{ needs.parse-feed.outputs.post_url }}
+          color: 0x5865F2
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 4. Post to Slack (optional — only runs if SLACK_WEBHOOK_URL secret exists)
+  # ─────────────────────────────────────────────────────────────────────────────
+  post-slack:
+    name: Post to Slack (optional)
+    runs-on: ubuntu-latest
+    needs: parse-feed
+    if: needs.parse-feed.outputs.post_url != '' && secrets.SLACK_WEBHOOK_URL != ''
+
+    steps:
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "📰 *${{ needs.parse-feed.outputs.post_title }}*\n${{ needs.parse-feed.outputs.post_desc }}\n🔗 ${{ needs.parse-feed.outputs.post_url }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
