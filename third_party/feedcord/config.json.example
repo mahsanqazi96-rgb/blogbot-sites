@@ -1,0 +1,17 @@
+{
+  "_comment": "FeedCord config — copy to config.json and fill in values. No bot token needed!",
+  "RssUrls": [
+    "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_tech.xml",
+    "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_crypto.xml",
+    "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_finance.xml",
+    "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_health.xml",
+    "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_entertainment.xml"
+  ],
+  "DiscordWebhookUrl": "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN",
+  "CheckIntervalMinutes": 15,
+  "ShowDescription": true,
+  "ShowImage": true,
+  "ShowAuthor": false,
+  "MentionEveryone": false,
+  "EmbedColor": 5793266
+}
