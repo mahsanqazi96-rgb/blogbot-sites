@@ -1,0 +1,56 @@
+# BlogBot — Bluesky RSS Feed Bot
+# Polls the hub RSS feed every 15 minutes and posts new items to Bluesky.
+# Uses: myConsciousness/bluesky-feed-bot (MIT, actively maintained)
+#
+# Required GitHub Secrets (set in repo Settings → Secrets → Actions):
+#   BLUESKY_IDENTIFIER  — your Bluesky handle, e.g. topicpulse.bsky.social
+#   BLUESKY_PASSWORD    — your Bluesky App Password (Settings → App Passwords)
+#
+# The RSS feed URL below points to the auto-generated hub feed.
+# Change FEED_URL if you want to post from a specific niche feed instead.
+
+name: Bluesky RSS Feed Bot
+
+on:
+  schedule:
+    # Run every 15 minutes — Bluesky feed bot deduplicates already-posted items
+    - cron: "*/15 * * * *"
+
+  # Also fire on every push (catches new posts immediately)
+  push:
+    branches: [main]
+    paths:
+      - "sites/*/posts/**"
+      - "sitemap_hub.xml"
+      - "feed.xml"
+
+  workflow_dispatch:
+
+jobs:
+  post-to-bluesky:
+    name: Post new RSS items to Bluesky
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Bluesky Feed Bot
+        uses: myConsciousness/bluesky-feed-bot@v4
+        with:
+          # Bluesky credentials (from GitHub Secrets)
+          identifier: ${{ secrets.BLUESKY_IDENTIFIER }}
+          password: ${{ secrets.BLUESKY_PASSWORD }}
+
+          # RSS feed to poll — the BlogBot hub feed aggregating all 500 blogs
+          feed-url: "https://raw.githubusercontent.com/${{ github.repository }}/main/feed.xml"
+
+          # Only post items published in the last 24 hours
+          # (prevents re-posting old items on first run)
+          interval-hours: 24
+
+          # Include URL in post (creates a link card on Bluesky)
+          include-url: true
+
+          # Post language tag
+          langs: "en"
