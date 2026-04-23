@@ -1,0 +1,208 @@
+================================================================================
+  BlogBot — Ad Network Codes
+  Paste your ad codes below, then tell Claude Code: "install the ad codes"
+================================================================================
+
+INSTRUCTIONS:
+  1. Find the correct section for each ad format below
+  2. Paste the code between the START and END markers
+  3. Save this file
+  4. Tell Claude Code: "install the ad codes"
+
+================================================================================
+POPADS  ✅ APPROVED
+================================================================================
+
+Placement: <head> of every page. Fires as a popunder on first user interaction.
+Note: Using anti-adblock variant (standard not separately offered by PopAds).
+Safe alongside Monetag Multitag — they use different delivery mechanisms.
+
+--- POPADS CODE START ---
+<script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+(function(){var y=window,l="a5a68e18cd631c06ce8d904524095128",c=[["siteId",240+797*960+807+4527548],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],i=["d3d3LmJsb2NrYWRzbm90LmNvbS9lZGpwL2pqc3RzLm1pbi5qcw==","ZG5oZmk1bm4yZHQ2Ny5jbG91ZGZyb250Lm5ldC90c3VwR2kvd3duYnVtL2VjbGFtcC5taW4uY3Nz"],f=-1,o,p,q=function(){clearTimeout(p);f++;if(i[f]&&!(1802901518000<(new Date).getTime()&&1<f)){o=y.document.createElement("script");o.type="text/javascript";o.async=!0;var r=y.document.getElementsByTagName("script")[0];o.src="https://"+atob(i[f]);o.crossOrigin="anonymous";o.onerror=q;o.onload=function(){clearTimeout(p);y[l.slice(0,16)+l.slice(0,16)]||q()};p=setTimeout(q,5E3);r.parentNode.insertBefore(o,r)}};if(!y[l]){try{Object.freeze(y[l]=c)}catch(e){}q()}})();
+/*]]>/* */
+</script>
+--- POPADS CODE END ---
+
+
+================================================================================
+ADSTERRA  ✅ APPROVED
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+POPUNDER  (Adsterra ID: 29086708)
+Placement: <head> of every page. Fires on first click anywhere on the page.
+This is your highest-earning format — always use it.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA POPUNDER START ---
+<script src="https://pl29187206.profitablecpmratenetwork.com/16/cc/bf/16ccbffc155b8b226ff5a4a3cee1b3f7.js"></script>
+
+
+--- ADSTERRA POPUNDER END ---
+
+────────────────────────────────────────────────────────────────────────────────
+NATIVE BANNER  (Adsterra ID: 29086709)
+Placement: injected after the 1st paragraph of every article.
+Looks like a content recommendation — very high CTR.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA NATIVE BANNER START ---
+<script async="async" data-cfasync="false" src="https://pl29187207.profitablecpmratenetwork.com/b8e877d8b944bec7a11a9b6416c4b5f8/invoke.js"></script>
+<div id="container-b8e877d8b944bec7a11a9b6416c4b5f8"></div>
+
+
+--- ADSTERRA NATIVE BANNER END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 468x60  (Adsterra ID: 29086710)
+Placement: between paragraph 2 and paragraph 3 of every article.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 468x60 START ---
+
+<script>
+  atOptions = {
+    'key' : 'f6af27682ac5ff1e3113b4d8a3cdc82c',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/f6af27682ac5ff1e3113b4d8a3cdc82c/invoke.js"></script>
+
+--- ADSTERRA BANNER 468x60 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 300x250  (Adsterra ID: 29086711)
+Placement: after the 3rd paragraph of every article (mid-content).
+300x250 is the best-performing display size globally — always use it.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 300x250 START ---
+<script>
+  atOptions = {
+    'key' : '32bc6dc6fa4e24522d1c13fc3c43873e',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/32bc6dc6fa4e24522d1c13fc3c43873e/invoke.js"></script>
+
+
+--- ADSTERRA BANNER 300x250 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 160x600  (Adsterra ID: 29086712)
+Placement: sticky sidebar on desktop (right side of article content).
+Wide skyscraper — stays visible as user scrolls.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 160x600 START ---
+<script>
+  atOptions = {
+    'key' : 'ad37d8688cc5d032a4cfeefa4505a142',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/ad37d8688cc5d032a4cfeefa4505a142/invoke.js"></script>
+
+
+--- ADSTERRA BANNER 160x600 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 160x300  (Adsterra ID: 29086713)
+Placement: between paragraph 4 and paragraph 5 of every article.
+Half-page banner — good mid-content placement.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 160x300 START ---
+<script>
+  atOptions = {
+    'key' : 'd98e219cbaffeec614f62f9c74f75212',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/d98e219cbaffeec614f62f9c74f75212/invoke.js"></script>
+
+
+--- ADSTERRA BANNER 160x300 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 320x50  (Adsterra ID: 29086714)
+Placement: sticky bar fixed to bottom of screen on mobile only.
+Shown only on screens under 768px wide — very high mobile impression count.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 320x50 START ---
+<script>
+  atOptions = {
+    'key' : '7f34021b82c52352e1b531fded7b07e0',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/7f34021b82c52352e1b531fded7b07e0/invoke.js"></script>
+
+
+--- ADSTERRA BANNER 320x50 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+BANNER 728x90  (Adsterra ID: 29086715)
+Placement: leaderboard below the blog header, above the article title.
+Desktop only (hidden on mobile). Classic above-the-fold spot.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA BANNER 728x90 START ---
+
+<script>
+  atOptions = {
+    'key' : 'dbadba18c43e9301d4313b491638f571',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/dbadba18c43e9301d4313b491638f571/invoke.js"></script>
+
+--- ADSTERRA BANNER 728x90 END ---
+
+────────────────────────────────────────────────────────────────────────────────
+SOCIAL BAR  (Adsterra ID: 29086716)
+Placement: just before </body> on every page. Auto-displays floating widget.
+Loads by itself — no visible placement needed. High CTR, zero effort.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA SOCIAL BAR START ---
+<script src="https://pl29187214.profitablecpmratenetwork.com/63/5b/f0/635bf00c45976ba637240a7a5b53447d.js"></script>
+
+
+--- ADSTERRA SOCIAL BAR END ---
+
+────────────────────────────────────────────────────────────────────────────────
+SMARTLINK  (Adsterra ID: 29086717)
+NOTE: This is a URL, not a script. Paste the full https:// link below.
+Placement: the blog logo in the header will link to this URL.
+Earns every time a visitor clicks the logo.
+────────────────────────────────────────────────────────────────────────────────
+--- ADSTERRA SMARTLINK START ---
+https://www.profitablecpmratenetwork.com/adrc3y3fh2?key=b9919be36327aa0a10fe1ff7575826e9
+
+--- ADSTERRA SMARTLINK END ---
+
+
+================================================================================
+MONETAG
+================================================================================
+Status: NOT YET REGISTERED — go to monetag.com/register/ (instant approval)
+
+--- MONETAG CODE START ---
+<script src="https://quge5.com/88/tag.min.js" data-zone="231924" async data-cfasync="false"></script>
+
+--- MONETAG CODE END ---
+
+================================================================================
