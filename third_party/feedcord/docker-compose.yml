@@ -1,0 +1,21 @@
+# BlogBot — FeedCord (RSS → Discord Webhooks, no bot needed)
+# Repo: https://github.com/Qolors/FeedCord
+#
+# This is the EASIER Discord option — no bot token required.
+# Just needs a Discord webhook URL from any channel.
+#
+# Usage:
+#   1. Fill in config.json (see config.json.example)
+#   2. Run: docker-compose up -d
+
+version: "3.8"
+
+services:
+  feedcord:
+    image: qolors/feedcord:latest
+    container_name: blogbot-feedcord
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json:ro
+    environment:
+      - TZ=UTC
