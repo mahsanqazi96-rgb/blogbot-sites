@@ -1,0 +1,37 @@
+# BlogBot — Skywrite (RSS → Bluesky thread poster)
+# Repo: https://github.com/mikedemarais/skywrite
+#
+# Usage:
+#   1. Copy to config.toml (remove .example)
+#   2. Fill in your Bluesky credentials
+#   3. Double-click START_SKYWRITE.bat to run
+
+[bluesky]
+identifier = "topicpulse.bsky.social"
+# App password from: https://bsky.app/settings/app-passwords
+password = "xxxx-xxxx-xxxx-xxxx"
+
+[feeds]
+# Check interval in minutes
+interval = 30
+
+# One [[feeds.source]] block per niche feed
+[[feeds.source]]
+  url = "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_tech.xml"
+  label = "Tech"
+
+[[feeds.source]]
+  url = "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_crypto.xml"
+  label = "Crypto"
+
+[[feeds.source]]
+  url = "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_finance.xml"
+  label = "Finance"
+
+[[feeds.source]]
+  url = "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_health.xml"
+  label = "Health"
+
+[[feeds.source]]
+  url = "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_entertainment.xml"
+  label = "Entertainment"
