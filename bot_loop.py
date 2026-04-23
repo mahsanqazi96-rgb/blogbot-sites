@@ -838,6 +838,89 @@ def _fire_traffic_signals(blog_url: str, slug: str, title: str, niche: str) -> N
     except Exception as e:
         _log.warning(f"Flipboard ping failed: {e}")
 
+    # ── Telegram channel publisher ───────────────────────────────────────────────
+    try:
+        from modules.telegram_publisher import publish_to_telegram
+        excerpt = f"New {niche} post: {title}"
+        tg_ok = publish_to_telegram(title=title, url=post_url, niche=niche, excerpt=excerpt)
+        if tg_ok:
+            _log.info(f"Telegram published [{slug}]")
+    except Exception as e:
+        _log.warning(f"Telegram publish failed: {e}")
+
+    # ── Bluesky publisher ────────────────────────────────────────────────────────
+    try:
+        from modules.bluesky_publisher import publish_to_bluesky
+        excerpt = f"New {niche} post: {title}"
+        bsky_ok = publish_to_bluesky(title=title, url=post_url, niche=niche, excerpt=excerpt)
+        if bsky_ok:
+            _log.info(f"Bluesky published [{slug}]")
+    except Exception as e:
+        _log.warning(f"Bluesky publish failed: {e}")
+
+    # ── Mastodon publisher ───────────────────────────────────────────────────────
+    try:
+        from modules.mastodon_publisher import publish_to_mastodon
+        excerpt = f"New {niche} post: {title}"
+        mast_ok = publish_to_mastodon(title=title, url=post_url, niche=niche, excerpt=excerpt)
+        if mast_ok:
+            _log.info(f"Mastodon published [{slug}]")
+    except Exception as e:
+        _log.warning(f"Mastodon publish failed: {e}")
+
+    # ── Reddit publisher ─────────────────────────────────────────────────────────
+    try:
+        from modules.reddit_publisher import publish_to_reddit
+        rd_ok = publish_to_reddit(title=title, url=post_url, niche=niche)
+        if rd_ok:
+            _log.info(f"Reddit submitted [{slug}]")
+    except Exception as e:
+        _log.warning(f"Reddit submit failed: {e}")
+
+    # ── Nostr publisher (crypto / finance / tech niches) ─────────────────────────
+    try:
+        from modules.nostr_publisher import publish_to_nostr
+        keywords = [niche, slug.replace("-", " ")]
+        ns_ok = publish_to_nostr(title=title, url=post_url, niche=niche, keywords=keywords)
+        if ns_ok:
+            _log.info(f"Nostr broadcast sent [{slug}]")
+    except Exception as e:
+        _log.warning(f"Nostr broadcast failed: {e}")
+
+    # ── Self-hosted web push (pywebpush) ─────────────────────────────────────────
+    try:
+        from modules.webpush_publisher import notify_subscribers
+        wp_ok = notify_subscribers(
+            title=title,
+            body=f"New {niche} post just published",
+            url=post_url,
+            niche=niche,
+        )
+        if wp_ok:
+            _log.info(f"WebPush broadcast sent [{slug}]")
+    except Exception as e:
+        _log.warning(f"WebPush broadcast failed: {e}")
+
+    # ── RSS feed regeneration ────────────────────────────────────────────────────
+    try:
+        from modules.rss_generator import generate_feed_for_site
+        import sqlite3, pathlib
+        # Resolve the on-disk site path from the blog URL slug
+        _site_slug = blog_url.rstrip("/").split("/")[-1]
+        _sites_root = pathlib.Path(__file__).parent / "sites"
+        _site_dir = _sites_root / _site_slug
+        if _site_dir.exists():
+            # Build a lightweight site_config stub so rss_generator can work
+            class _SiteCfg:
+                niche     = niche
+                site_url  = blog_url
+                site_name = _site_slug.replace("-", " ").title()
+                language  = "en"
+            generate_feed_for_site(_site_dir, _SiteCfg())
+            _log.info(f"RSS feed regenerated for {_site_slug}")
+    except Exception as e:
+        _log.warning(f"RSS feed regen failed: {e}")
+
 
 # ── Cycle runner ─────────────────────────────────────────────────────────────────
 
