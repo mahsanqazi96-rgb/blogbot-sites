@@ -5,16 +5,16 @@
 
 ## CURRENT STATUS
 
-Build Phase: ALL PHASES COMPLETE ✅ + BOT RUNNING ✅ + 225 POSTS LIVE ✅ + ADS ACTIVE ✅ + CF ANALYTICS LIVE ✅ + 16 TRAFFIC TOOLS BUILT ✅
-Last Completed: SESSION-039 — All 29 files pushed to GitHub (2026-04-24) — all 16 traffic tools complete
-Currently Working On: WAITING FOR USER CREDENTIALS — run `py setup_traffic_keys.py` to activate social tools
+Build Phase: ALL PHASES COMPLETE ✅ + BOT RUNNING ✅ + 225 POSTS LIVE ✅ + ALL 3 AD NETWORKS ✅ + 16 TRAFFIC TOOLS ✅ + BUG FIXES ✅
+Last Completed: SESSION-039c — PopAds installed, canonical URLs fixed (1,101 files), AI phrase filter added (2026-04-24)
+Currently Working On: STABLE — bot can run. Waiting for user credentials for social platforms.
 
 ⚡ NEXT SESSION INSTRUCTIONS FOR CLAUDE:
-  1. No code build needed — all 16 tools are built, wired, and pushed (29/29 files on GitHub)
-  2. Check which credentials user has entered via setup_traffic_keys.py
-  3. If Docker is installed: help user start docker-compose services (postiz/monitorrss/listmonk)
-  4. Once any social credentials entered → every new post fires to those channels automatically
-  5. GitHub Actions already live — IndexNow fires on every push (no credentials needed)
+  1. Read KNOWN_BUGS.md — CONCERN-001 fixed, CONCERN-002/004 still pending (Month 2)
+  2. Check if user has run setup_traffic_keys.py with any social credentials
+  3. If Docker is installed: help user start docker-compose for postiz/monitorrss/listmonk
+  4. If bot has been running: check logs for any new errors, check ad revenue in dashboard
+  5. Next planned builds: CF build-limit fix (CONCERN-002) + content dedup (CONCERN-004)
 
 LIVE NETWORK: https://topicpulse.pages.dev
   - Root hub page: 100 blogs with descriptions, niche filter, search bar
@@ -99,8 +99,7 @@ TO-DO (user action needed — priority order):
   LONGER TERM:
   6. Reddit: create 2-3 accounts NOW and start aging them (30 days needed before link posts)
   7. Install Docker Desktop (optional): for Postiz + MonitoRSS + listmonk
-  8. PopAds: still awaiting approval
-  9. Register Cloudflare accounts 2-5 for scale to 500 blogs total
+  8. Register Cloudflare accounts 2-5 for scale to 500 blogs total
 
 SESSION-039 TRAFFIC TOOLS — BUILD STATUS (2026-04-24):
   ── PYTHON MODULES (built, wired, firing on every post publish) ──────────────
@@ -292,7 +291,21 @@ Ready for adult account configuration: YES
 
 ## ACTIVE ISSUES
 
-None — all tests passing.
+### ~~HIGH — CONCERN-001: Wrong canonical URLs in post HTML files~~ ✅ FIXED (SESSION-039b)
+1,101 files patched. GitHub commit 9ab04bd77280. CF deployment 7eeda3fa triggered.
+fix_canonical_urls.py is idempotent — safe to re-run if needed.
+
+### MEDIUM — CONCERN-002: CF build limit will hit at scale
+Plan: switch to scheduled CF deploy (once per 4-6 hours) before Month 2.
+
+### MEDIUM — CONCERN-003: AI self-reference phrases (preventive)
+Filter added to quality_control.py. 0 found in existing posts. Monitor going forward.
+
+### MEDIUM — CONCERN-004: Content deduplication across blogs
+Build dedup check in bot_loop.py before Month 2 scaling.
+
+### LOW — CONCERN-005: Adult niche not deployed
+Activate when user is ready. All code is built.
 
 ---
 
