@@ -3,6 +3,33 @@
 
 ---
 
+## SESSION-039c (same session — bug fixes)
+Date: 2026-04-24
+Phase: CONCERN AUDIT + HIGH-URGENCY FIXES
+
+### Problems audited and documented:
+1. CONCERN-001 (HIGH): Wrong canonical URLs / base href in all HTML files → FIXED
+2. CONCERN-002 (MEDIUM): CF build limit at scale → documented, plan for Month 2
+3. CONCERN-003 (MEDIUM): AI self-reference phrases in content → preventive filter added
+4. CONCERN-004 (MEDIUM): Content duplication across same-niche blogs → plan for Month 2
+5. CONCERN-005 (LOW): Adult niche not deployed → deferred, code is ready
+
+### Fixes applied:
+| Fix | File | Result |
+|-----|------|--------|
+| AI phrase filter | modules/quality_control.py | _strip_ai_phrases() added, runs on every post |
+| Canonical URL patch | fix_canonical_urls.py (new) | 1,101 files fixed |
+| GitHub commit (1,101 HTML files) | — | 9ab04bd77280 |
+| Cloudflare build triggered | — | 7eeda3fa-6bbb-4049 |
+| KNOWN_BUGS.md | CONCERN-001 to CONCERN-005 documented | — |
+| CURRENT_STATE.md | Active issues updated | — |
+
+### Verification:
+- Canonical URL fix: sample posts confirmed clean (blogbot-sites.pages.dev gone)
+- AI phrase filter: 5/5 test cases correctly transformed, 1/1 clean sentence untouched
+
+---
+
 ## SESSION-039b (same session — continued)
 Date: 2026-04-24
 Phase: POPADS INTEGRATION
