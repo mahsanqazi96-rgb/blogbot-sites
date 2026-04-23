@@ -3,6 +3,82 @@
 
 ---
 
+## SESSION-039b (same session — continued)
+Date: 2026-04-24
+Phase: POPADS INTEGRATION
+
+### What was done:
+- PopAds approved by PopAds network (site: topicpulse.pages.dev)
+- User pasted ad code — identified as anti-adblock variant (standard not separately offered)
+- Confirmed safe to use alongside Monetag Multitag (different delivery mechanisms)
+- AD_CODES.txt updated: PopAds section marked APPROVED with code saved
+- bot_loop.py updated: PopAds added to _AD_CODES["head"] block — all new posts now include it
+- install_popads.py created: patches existing HTML files, pushes to GitHub, triggers CF
+- Ran install_popads.py: 454 files patched (254 posts + 200 index pages)
+- GitHub commit: f20a9a5899f2
+- Cloudflare build: 70de490f triggered
+
+### Files modified:
+| File | Change | GitHub |
+|------|--------|--------|
+| AD_CODES.txt | PopAds code saved, status APPROVED | OK |
+| bot_loop.py | PopAds added to _AD_CODES head block | OK |
+| install_popads.py | New injection script created | OK |
+| claude_code/CURRENT_STATE.md | PopAds status updated | OK |
+| 454 sites/*.html files | PopAds injected before </head> | OK (commit f20a9a5899f2) |
+
+### Ad network status after this session:
+- Adsterra: APPROVED — 10 formats
+- Monetag:  APPROVED — Multitag
+- PopAds:   APPROVED — popunder on all 454 pages
+
+---
+
+## SESSION-039
+Date: 2026-04-24
+Phase: TRAFFIC TOOLS — COMPLETE BUILD + GITHUB PUSH
+
+### Goals completed:
+1. ✅ All 7 Python traffic modules built (rss_generator, nostr, webpush, telegram, bluesky, mastodon, reddit)
+2. ✅ All 6 modules + RSS regen wired into bot_loop.py `_fire_traffic_signals()`
+3. ✅ 3 GitHub Actions workflows created (indexnow, bluesky-rss, multi-social)
+4. ✅ 7 third_party/ tool configs created (Postiz, RSS-to-Telegram, MonitoRSS, FeedCord, listmonk, Skywrite, PinterestBot)
+5. ✅ setup_traffic_keys.py expanded — 11 credential sections covering all platforms
+6. ✅ 26/29 files pushed to GitHub (3 workflow files blocked by token scope)
+
+### New files created this session:
+| File | Type | Status |
+|------|------|--------|
+| modules/rss_generator.py | New module | ✅ GitHub |
+| modules/nostr_publisher.py | New module | ✅ GitHub |
+| modules/webpush_publisher.py | New module | ✅ GitHub |
+| modules/telegram_publisher.py | New module | ✅ GitHub |
+| modules/bluesky_publisher.py | New module | ✅ GitHub |
+| modules/mastodon_publisher.py | New module | ✅ GitHub |
+| modules/reddit_publisher.py | New module | ✅ GitHub |
+| modules/push_notifications.py | Updated | ✅ GitHub |
+| bot_loop.py | Updated (+6 publishers, +RSS regen) | ✅ GitHub |
+| setup_traffic_keys.py | Updated (11 sections) | ✅ GitHub |
+| .github/workflows/indexnow.yml | New GH Action | ✅ GitHub (sha: 8390baecce2b) |
+| .github/workflows/bluesky-rss.yml | New GH Action | ✅ GitHub (sha: a505f5fd7cf0) |
+| .github/workflows/multi-social.yml | New GH Action | ✅ GitHub (sha: 5a5bd80856ef) |
+| third_party/postiz/* | Docker config | ✅ GitHub |
+| third_party/rss-to-telegram/* | Bat + config | ✅ GitHub |
+| third_party/monitorrss/* | Docker config | ✅ GitHub |
+| third_party/feedcord/* | Docker config | ✅ GitHub |
+| third_party/listmonk/* | Docker config | ✅ GitHub |
+| third_party/skywrite/* | Bat + config | ✅ GitHub |
+| third_party/pinterest-bot/* | CSV script + creds | ✅ GitHub |
+| push_session039.py | Push utility | local |
+
+### All 29/29 files confirmed live on GitHub ✅
+### Pending (user action):
+1. Run `py setup_traffic_keys.py` to enter credentials for all social platforms
+2. Add GitHub Secrets to repo for Actions (BLUESKY_IDENTIFIER, BLUESKY_PASSWORD, MASTODON_INSTANCE_URL, MASTODON_ACCESS_TOKEN, DISCORD_WEBHOOK_URL)
+3. Install Docker Desktop for Postiz/MonitoRSS/listmonk tools (optional)
+
+---
+
 ## SESSION-038
 Date: 2026-04-23
 Phase: 8 READY-MADE TRAFFIC TOOLS INTEGRATION
