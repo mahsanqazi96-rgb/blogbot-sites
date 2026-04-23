@@ -1,0 +1,75 @@
+# BlogBot — IndexNow GitHub Action
+# Fires on every push to main and submits all changed sitemap URLs to Bing and Yandex.
+# No secrets required — IndexNow key is embedded in the site's ads.txt / root path.
+# Uses: bojieyang/indexnow-action (MIT licence, actively maintained)
+
+name: IndexNow — Submit to Bing & Yandex
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sites/*/posts/**"
+      - "sites/*/index.html"
+      - "sites/*/sitemap.xml"
+
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  indexnow:
+    name: Submit URLs via IndexNow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # Need previous commit to detect changed files
+
+      - name: Collect changed sitemap URLs
+        id: changed_urls
+        run: |
+          # Get all HTML files that changed in this push
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'sites/*/posts/*.html' 'sites/*/index.html' | head -50)
+
+          # Convert local paths to full URLs
+          # Pattern: sites/site-NNN/posts/slug.html → https://site-NNN.pages.dev/posts/slug.html
+          URLS=""
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            # Extract site slug (e.g. site-001)
+            SITE_SLUG=$(echo "$file" | cut -d'/' -f2)
+            REST=$(echo "$file" | cut -d'/' -f3-)
+            URL="https://${SITE_SLUG}.pages.dev/${REST}"
+            URLS="${URLS}${URL}"$'\n'
+          done <<< "$CHANGED"
+
+          # Fall back to sitemaps if no individual files changed
+          if [ -z "$(echo "$URLS" | tr -d '[:space:]')" ]; then
+            echo "No individual HTML files changed — will submit sitemaps instead"
+            CHANGED_SITES=$(git diff --name-only HEAD~1 HEAD -- 'sites/*' | cut -d'/' -f1-2 | sort -u | head -20)
+            while IFS= read -r site; do
+              [ -z "$site" ] && continue
+              SLUG=$(echo "$site" | cut -d'/' -f2)
+              URL="https://${SLUG}.pages.dev/sitemap.xml"
+              URLS="${URLS}${URL}"$'\n'
+            done <<< "$CHANGED_SITES"
+          fi
+
+          # Write URLs to file (one per line, max 50)
+          echo "$URLS" | head -50 > /tmp/indexnow_urls.txt
+          echo "urls_file=/tmp/indexnow_urls.txt" >> "$GITHUB_OUTPUT"
+          echo "--- URLs to submit ---"
+          cat /tmp/indexnow_urls.txt
+
+      - name: Submit to IndexNow (Bing + Yandex)
+        uses: bojieyang/indexnow-action@v2
+        with:
+          sitemap-location: "https://raw.githubusercontent.com/${{ github.repository }}/main/sitemap_hub.xml"
+          # indexnow-key is optional — action auto-discovers from sitemap if omitted
+          # Set this secret if you have a dedicated IndexNow key:
+          # key: ${{ secrets.INDEXNOW_KEY }}
+          since: 1              # Submit URLs updated in the last 1 day
+          since-unit: "days"
+          endpoint: "api.indexnow.org"   # Submits to all IndexNow-compatible engines at once
