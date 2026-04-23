@@ -1,0 +1,50 @@
+# BlogBot — listmonk (Self-hosted Newsletter + Mailing List)
+# Repo: https://github.com/knadh/listmonk
+#
+# Usage:
+#   1. Copy config.toml.example → config.toml and fill in SMTP values
+#   2. Run: docker-compose up -d
+#   3. Open http://localhost:9000 — default login: admin / admin123
+#   4. Change password immediately in Settings → Users
+#   5. Create a mailing list for each niche in the dashboard
+#   6. Embed the signup form snippet in BlogBot's Jinja2 templates
+#
+# SMTP: Get free Brevo SMTP credentials at https://www.brevo.com
+# Requires: Docker Desktop
+
+version: "3.8"
+
+services:
+  listmonk:
+    image: listmonk/listmonk:latest
+    container_name: blogbot-listmonk
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      - LISTMONK_db__host=listmonk-db
+      - LISTMONK_db__port=5432
+      - LISTMONK_db__user=listmonk
+      - LISTMONK_db__password=listmonkpassword
+      - LISTMONK_db__database=listmonk
+    volumes:
+      - ./config.toml:/listmonk/config.toml:ro
+      - listmonk_uploads:/listmonk/uploads
+    depends_on:
+      - listmonk-db
+    command: ["./listmonk", "--config", "/listmonk/config.toml"]
+
+  listmonk-db:
+    image: postgres:15-alpine
+    container_name: blogbot-listmonk-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: listmonk
+      POSTGRES_PASSWORD: listmonkpassword
+      POSTGRES_DB: listmonk
+    volumes:
+      - listmonk_db_data:/var/lib/postgresql/data
+
+volumes:
+  listmonk_uploads:
+  listmonk_db_data:
