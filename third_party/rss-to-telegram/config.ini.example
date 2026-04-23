@@ -1,0 +1,28 @@
+# BlogBot — RSS-to-Telegram config
+# Tool: https://github.com/BoKKeR/RSS-to-Telegram-Bot
+#
+# Usage:
+#   1. Copy this file to config.ini (remove .example)
+#   2. Fill in your values below
+#   3. Double-click START_TELEGRAM_BOT.bat to run
+#
+# How it works:
+#   The bot polls your RSS feeds every few minutes and posts new items
+#   to the specified Telegram channels automatically.
+
+[DEFAULT]
+# Your Telegram bot token (from @BotFather)
+TELEGRAM_TOKEN = your_bot_token_here
+
+# How often to check for new posts (seconds). 300 = every 5 minutes
+UPDATE_INTERVAL = 300
+
+[FEEDS]
+# Format: channel_id_or_username = feed_url
+# One line per feed. Channel must have bot as admin.
+
+@topicpulse_tech     = https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_tech.xml
+@topicpulse_crypto   = https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_crypto.xml
+@topicpulse_finance  = https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_finance.xml
+@topicpulse_health   = https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_health.xml
+@topicpulse_viral    = https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_entertainment.xml
