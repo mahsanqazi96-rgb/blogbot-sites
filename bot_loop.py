@@ -588,11 +588,30 @@ def _generate_and_write(blog: Dict, dry_run: bool = False) -> "_ExtPublishResult
     )
 
     # ── Active ad codes — injected into every page the bot generates ───────────
-    # Monetag Multitag + Adsterra Popunder go in <head>
+    # Monetag Multitag + Adsterra Popunder + PopAds go in <head>
     # Adsterra Social Bar goes before </body> (slot_1)
     # Adsterra Native Banner (728x90) goes mid-content (slot_3)
+    _POPADS_CODE = (
+        '<script type="text/javascript" data-cfasync="false">\n'
+        '/*<![CDATA[/* */\n'
+        '(function(){var y=window,l="a5a68e18cd631c06ce8d904524095128",'
+        'c=[["siteId",240+797*960+807+4527548],["minBid",0],["popundersPerIP","0"],'
+        '["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],'
+        'i=["d3d3LmJsb2NrYWRzbm90LmNvbS9lZGpwL2pqc3RzLm1pbi5qcw==",'
+        '"ZG5oZmk1bm4yZHQ2Ny5jbG91ZGZyb250Lm5ldC90c3VwR2kvd3duYnVtL2VjbGFtcC5taW4uY3Nz"],'
+        'f=-1,o,p,q=function(){clearTimeout(p);f++;if(i[f]&&!(1802901518000<(new Date).getTime()&&1<f)){'
+        'o=y.document.createElement("script");o.type="text/javascript";o.async=!0;'
+        'var r=y.document.getElementsByTagName("script")[0];'
+        'o.src="https://"+atob(i[f]);o.crossOrigin="anonymous";o.onerror=q;'
+        'o.onload=function(){clearTimeout(p);y[l.slice(0,16)+l.slice(0,16)]||q()};'
+        'p=setTimeout(q,5E3);r.parentNode.insertBefore(o,r)}};'
+        'if(!y[l]){try{Object.freeze(y[l]=c)}catch(e){}q()}})();\n'
+        '/*]]>/* */\n'
+        '</script>'
+    )
     _AD_CODES = {
         "head": (
+            _POPADS_CODE + '\n'
             '<script src="https://quge5.com/88/tag.min.js"'
             ' data-zone="231924" async data-cfasync="false"></script>\n'
             '<script src="https://pl29187206.profitablecpmratenetwork.com'
