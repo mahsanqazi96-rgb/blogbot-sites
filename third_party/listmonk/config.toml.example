@@ -1,0 +1,34 @@
+# listmonk config — copy to config.toml and fill in SMTP values
+# Full docs: https://listmonk.app/docs/configuration
+
+[app]
+address = "0.0.0.0:9000"
+admin_username = "admin"
+# Change this password after first login!
+admin_password = "admin123"
+
+[db]
+host = "listmonk-db"
+port = 5432
+user = "listmonk"
+password = "listmonkpassword"
+database = "listmonk"
+ssl_mode = "disable"
+max_open = 25
+max_idle = 25
+max_lifetime = "300s"
+
+[smtp]
+# Brevo (Sendinblue) free SMTP — get credentials at https://www.brevo.com
+[[smtp]]
+  enabled = true
+  host = "smtp-relay.brevo.com"
+  port = 587
+  auth_protocol = "login"
+  username = "YOUR_BREVO_EMAIL@example.com"
+  password = "YOUR_BREVO_SMTP_KEY"
+  max_conns = 10
+  idle_timeout = "15s"
+  wait_timeout = "5s"
+  tls_type = "starttls"
+  tls_skip_verify = false
