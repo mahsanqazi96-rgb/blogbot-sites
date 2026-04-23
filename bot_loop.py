@@ -929,13 +929,19 @@ def _fire_traffic_signals(blog_url: str, slug: str, title: str, niche: str) -> N
         _sites_root = pathlib.Path(__file__).parent / "sites"
         _site_dir = _sites_root / _site_slug
         if _site_dir.exists():
-            # Build a lightweight site_config stub so rss_generator can work
-            class _SiteCfg:
-                niche     = niche
-                site_url  = blog_url
-                site_name = _site_slug.replace("-", " ").title()
-                language  = "en"
-            generate_feed_for_site(_site_dir, _SiteCfg())
+            # Build a lightweight site_config stub so rss_generator can work.
+            # rss_generator reads .blog_url and .title (not .site_url/.site_name).
+            # Use SimpleNamespace to avoid Python class-body scoping issues where
+            # class attributes referencing outer function locals raise NameError.
+            import types as _types
+            _site_cfg = _types.SimpleNamespace(
+                niche     = niche,
+                blog_url  = blog_url,
+                title     = _site_slug.replace("-", " ").title(),
+                language  = "en",
+                meta_desc = "",
+            )
+            generate_feed_for_site(_site_dir, _site_cfg)
             _log.info(f"RSS feed regenerated for {_site_slug}")
     except Exception as e:
         _log.warning(f"RSS feed regen failed: {e}")
