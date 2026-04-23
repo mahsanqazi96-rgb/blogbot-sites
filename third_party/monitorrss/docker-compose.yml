@@ -1,0 +1,34 @@
+# BlogBot — MonitoRSS (RSS → Discord)
+# Repo: https://github.com/synzen/MonitoRSS
+#
+# Usage:
+#   1. Fill in config.json (see config.json.example)
+#   2. Run: docker-compose up -d
+#   3. MonitoRSS will post new RSS items to your Discord channels
+#
+# Requires: Docker Desktop + Discord bot token
+
+version: "3.8"
+
+services:
+  monitorss:
+    image: synzen/monitorss:latest
+    container_name: blogbot-monitorss
+    restart: unless-stopped
+    environment:
+      - DRSS_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+      - DRSS_DATABASE_URI=mongodb://monitorss-mongo:27017/monitorss
+    volumes:
+      - ./config.json:/app/config.json:ro
+    depends_on:
+      - monitorss-mongo
+
+  monitorss-mongo:
+    image: mongo:6-focal
+    container_name: blogbot-monitorss-mongo
+    restart: unless-stopped
+    volumes:
+      - monitorss_data:/data/db
+
+volumes:
+  monitorss_data:
