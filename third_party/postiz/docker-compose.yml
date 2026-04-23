@@ -1,0 +1,61 @@
+# BlogBot — Postiz Social Media Scheduler
+# Repo: https://github.com/gitroomhq/postiz-app
+#
+# Usage:
+#   1. Copy .env.example → .env and fill in all values
+#   2. Run: docker-compose up -d
+#   3. Open http://localhost:5000 to access the dashboard
+#   4. Connect your social accounts inside Postiz
+#   5. BlogBot's social modules post directly — Postiz is an optional UI layer
+#
+# Requires: Docker Desktop running
+
+version: "3.8"
+
+services:
+  postiz:
+    image: ghcr.io/gitroomhq/postiz-app:latest
+    container_name: blogbot-postiz
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://postiz:postizpassword@postiz-db:5432/postiz
+      - REDIS_URL=redis://postiz-redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - FRONTEND_URL=http://localhost:5000
+      - BACKEND_INTERNAL_URL=http://localhost:5000
+      - IS_GENERAL=true
+      # Social keys (optional — only needed for Postiz UI scheduling)
+      - X_API_KEY=${X_API_KEY:-}
+      - X_API_SECRET=${X_API_SECRET:-}
+      - LINKEDIN_CLIENT_ID=${LINKEDIN_CLIENT_ID:-}
+      - LINKEDIN_CLIENT_SECRET=${LINKEDIN_CLIENT_SECRET:-}
+    depends_on:
+      - postiz-db
+      - postiz-redis
+    volumes:
+      - postiz_uploads:/app/uploads
+
+  postiz-db:
+    image: postgres:15-alpine
+    container_name: blogbot-postiz-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postiz
+      POSTGRES_PASSWORD: postizpassword
+      POSTGRES_DB: postiz
+    volumes:
+      - postiz_db_data:/var/lib/postgresql/data
+
+  postiz-redis:
+    image: redis:7-alpine
+    container_name: blogbot-postiz-redis
+    restart: unless-stopped
+    volumes:
+      - postiz_redis_data:/data
+
+volumes:
+  postiz_uploads:
+  postiz_db_data:
+  postiz_redis_data:
