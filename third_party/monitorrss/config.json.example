@@ -1,0 +1,40 @@
+{
+  "_comment": "MonitoRSS config — copy to config.json and fill in values",
+  "feeds": [
+    {
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_tech.xml",
+      "channel": "DISCORD_TECH_CHANNEL_ID",
+      "message": {
+        "text": "📡 **{title}**\n{description}\n🔗 {link}"
+      }
+    },
+    {
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_crypto.xml",
+      "channel": "DISCORD_CRYPTO_CHANNEL_ID",
+      "message": {
+        "text": "₿ **{title}**\n{description}\n🔗 {link}"
+      }
+    },
+    {
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_finance.xml",
+      "channel": "DISCORD_FINANCE_CHANNEL_ID",
+      "message": {
+        "text": "💰 **{title}**\n{description}\n🔗 {link}"
+      }
+    },
+    {
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_health.xml",
+      "channel": "DISCORD_HEALTH_CHANNEL_ID",
+      "message": {
+        "text": "🏥 **{title}**\n{description}\n🔗 {link}"
+      }
+    },
+    {
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/blogbot/feed_entertainment.xml",
+      "channel": "DISCORD_ENTERTAINMENT_CHANNEL_ID",
+      "message": {
+        "text": "🎭 **{title}**\n{description}\n🔗 {link}"
+      }
+    }
+  ]
+}
