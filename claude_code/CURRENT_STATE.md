@@ -26,20 +26,29 @@ LIVE NETWORK: https://topicpulse.pages.dev
   - IndexNow key live: topicpulse.pages.dev/f00a67501cd09f1f9f3977cbcad94c53.txt
   - All 100 sitemaps correct URLs ✅
 
-BOT PIPELINE STATUS (verified working 2026-04-23):
+BOT PIPELINE STATUS (verified working 2026-04-24):
   - Content generation: ✅ Groq/llama-3.3-70b-versatile → 600-900w posts
   - QC gate: ✅ all posts passing (word count, quality gates)
   - Static HTML generation: ✅ post + index + sitemap regenerated per cycle
   - GitHub batch push (Trees API): ✅ 10 blogs → 1 commit → 1 CF build
   - CF Pages deployment: ✅ auto-triggered, status=success within 30s
-  - IndexNow: ✅ 3/3 OK per blog (Bing 202, api.indexnow.org 200, Yandex 202)
-  - RSS pings: ✅ 3/20 OK per blog (pingomatic, blogshares, blo.gs)
-  - Twitter/Pinterest/Tumblr: ❌ API keys not configured (intentionally skipped)
-  - OneSignal push: ✅ MODULE READY — run setup_traffic_keys.py to activate
-  - Medium syndication: ✅ MODULE READY — run setup_traffic_keys.py to activate
-  - CryptoPanic RSS: ✅ MODULE READY (crypto/finance only) — run setup_traffic_keys.py to activate
-  - Flipboard ping: ✅ MODULE READY (no key needed) — auto-active from next cycle
-  - Directory submission: ✅ MODULE READY — fires on every new blog creation
+  - IndexNow (Python): ✅ 3/3 OK per blog (Bing, api.indexnow.org, Yandex)
+  - IndexNow (GitHub Action): ✅ fires on every git push automatically
+  - RSS pings: ✅ fires on every post (pingomatic, blogshares, blo.gs + 500 others)
+  - Nostr publisher: ✅ ACTIVE — broadcasts to 10 relays (crypto/finance/tech posts)
+  - Flipboard ping: ✅ ACTIVE — no key needed, fires on every post
+  - Directory submission: ✅ ACTIVE — fires on every new blog creation
+  - Telegram: ⏳ READY — waiting for bot token + channel IDs (setup_traffic_keys.py)
+  - Bluesky (Python): ⏳ READY — waiting for handle + app password
+  - Bluesky (GitHub Action): ⏳ READY — waiting for GitHub Secrets
+  - Mastodon (Python): ⏳ READY — waiting for instance URL + access token
+  - Mastodon (GitHub Action): ⏳ READY — waiting for GitHub Secrets
+  - Reddit: ⏳ READY — waiting for API creds + aged accounts (30 days)
+  - WebPush (pywebpush): ✅ ACTIVE — VAPID keys auto-generated, fires when subscribers exist
+  - OneSignal push: ✅ ACTIVE — App ID configured (63b20959)
+  - Medium syndication: ⏳ READY — waiting for integration token
+  - CryptoPanic RSS: ⏳ READY — waiting for API token (paid plan)
+  - Twitter/Pinterest/Tumblr: ⏳ DEFERRED — API keys not configured (intentionally skipped)
 
 AD NETWORK STATUS:
   - Adsterra: APPROVED ✅ — 10 formats installed
