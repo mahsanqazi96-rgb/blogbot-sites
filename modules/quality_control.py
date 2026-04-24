@@ -2,7 +2,7 @@
 BlogBot — quality_control.py
 Stage 5 of the 5-stage content pipeline — the gate before publish.
 
-All 17 checks must pass before a ContentDraft is approved.
+All 19 checks must pass before a ContentDraft is approved.
 Any BLOCK failure = draft rejected.
 Any WARN = logged and flagged but draft can still publish.
 
@@ -24,6 +24,8 @@ Checks:
  15.  Schema markup placeholder present
  16.  Canonical URL placeholder present
  17.  Affiliate link cloaking check + legal disclosure present
+ 18.  GEO structure check (AI search engine citation eligibility)
+ 19.  Readability score via Flesch Reading Ease (textstat)
 """
 
 import sys
@@ -35,6 +37,19 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
+
+# ── Optional quality libraries (graceful degradation if not installed) ──────────
+try:
+    import textstat as _textstat
+    _TEXTSTAT_OK = True
+except ImportError:
+    _TEXTSTAT_OK = False
+
+try:
+    from cleantext import clean as _clean_text
+    _CLEANTEXT_OK = True
+except ImportError:
+    _CLEANTEXT_OK = False
 
 # ── Path bootstrap ─────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.parent.resolve()
@@ -283,6 +298,40 @@ def _strip_ai_phrases(text: str) -> str:
             pass  # malformed pattern should never happen, but never crash QC
 
     # Collapse any double spaces left by empty replacements
+    text = re.sub(r"  +", " ", text)
+    return text
+
+
+def _normalize_text(text: str) -> str:
+    """
+    Normalize text: fix encoding artifacts, remove invisible Unicode characters,
+    normalize quotes and dashes.  Uses clean-text library if available; falls
+    back to basic unicodedata normalization.
+    Zero network calls — pure text processing.
+    """
+    if _CLEANTEXT_OK:
+        try:
+            return _clean_text(
+                text,
+                fix_unicode=True,
+                to_ascii=False,          # Keep non-ASCII (Arabic, Hindi, Urdu)
+                lower=False,             # Never lowercase
+                no_line_breaks=False,
+                no_urls=False,           # Keep URLs intact
+                no_emails=False,
+                no_phone_numbers=False,
+                no_numbers=False,
+                no_digits=False,
+                no_currency_symbols=False,
+                no_punct=False,          # Keep punctuation
+                no_emoji=True,           # Strip emoji — unpredictable in HTML
+                lang="en",
+            )
+        except Exception:
+            pass
+    # Basic fallback: strip invisible control chars, collapse double spaces
+    import unicodedata
+    text = "".join(c for c in text if unicodedata.category(c) != "Cf")
     text = re.sub(r"  +", " ", text)
     return text
 
@@ -595,6 +644,39 @@ def check_affiliate_cloaking(body_html: str) -> CheckResult:
     return CheckResult("affiliate_cloaking", PASS)
 
 
+def check_readability(body_html: str, niche: str) -> CheckResult:
+    """
+    Flesch Reading Ease readability check using textstat.
+    Score: 0-30 very hard, 30-50 hard, 50-70 standard, 70-90 easy, 90-100 very easy.
+    Target for blogs: 30-85 (accessible without being shallow).
+    Only issues WARNs — never BLOCKs. Adult niche skipped.
+    Zero network calls — pure text analysis.
+    """
+    if not _TEXTSTAT_OK:
+        return CheckResult("readability", PASS, "textstat not installed — skipped")
+    if niche == "adult":
+        return CheckResult("readability", PASS, "adult niche — skipped")
+
+    plain = _strip_html(body_html)
+    if len(plain.split()) < 100:
+        return CheckResult("readability", PASS, "too short for reliable score")
+
+    try:
+        score = _textstat.flesch_reading_ease(plain)
+        grade = _textstat.text_standard(plain, float_output=False)
+        if score < 20:
+            return CheckResult("readability", WARN,
+                               f"Flesch {score:.0f}/100 — very difficult ({grade}). "
+                               f"Consider shorter sentences.")
+        if score > 88:
+            return CheckResult("readability", WARN,
+                               f"Flesch {score:.0f}/100 — very easy ({grade}). "
+                               f"May lack depth for {niche} audience.")
+        return CheckResult("readability", PASS, f"Flesch {score:.0f}/100 ({grade})")
+    except Exception as e:
+        return CheckResult("readability", PASS, f"skipped: {e}")
+
+
 # ── Main QC Runner ────────────────────────────────────────────────────────────
 def run_qc(
     body_html:      str,
@@ -603,11 +685,12 @@ def run_qc(
     known_content:  Optional[List[str]] = None,
 ) -> QCReport:
     """
-    Run all 18 QC checks on a content draft.
+    Run all 19 QC checks on a content draft.
     Returns a QCReport with approved=True only if no BLOCK checks fail.
     """
     # Strip AI self-reference phrases before any check runs
     body_html = _strip_ai_phrases(body_html)
+    body_html = _normalize_text(body_html)
 
     report = QCReport(approved=True, hold_for_review=False)
 
@@ -647,6 +730,8 @@ def run_qc(
     report.add(check_affiliate_cloaking(body_html))
     # 18. GEO structure
     report.add(check_geo_structure(body_html))
+    # 19. Readability (WARN only — never blocks)
+    report.add(check_readability(body_html, niche))
 
     return report
 
@@ -784,7 +869,7 @@ if __name__ == "__main__":
     print(f"  Affiliate cloaking warn: {'OK' if aff_check and aff_check.status == WARN else 'FAIL'}")
 
     print()
-    print(f"  Total checks: 17")
+    print(f"  Total checks: 19")
     print(f"  Full report for good content:")
     for line in report.summary().split('\n'):
         print(f"    {line}")

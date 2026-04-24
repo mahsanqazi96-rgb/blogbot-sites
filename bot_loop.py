@@ -906,6 +906,24 @@ def _fire_traffic_signals(blog_url: str, slug: str, title: str, niche: str) -> N
     except Exception as e:
         _log.warning(f"Nostr broadcast failed: {e}")
 
+    # ── Twitter/X publisher (tweepy — credentials optional) ──────────────────────
+    try:
+        from modules.twitter_publisher import publish_to_twitter
+        tw_ok = publish_to_twitter(title=title, url=post_url, niche=niche)
+        if tw_ok:
+            _log.info(f"Twitter posted [{slug}]")
+    except Exception as e:
+        _log.warning(f"Twitter post failed: {e}")
+
+    # ── Tumblr republisher (pytumblr — credentials optional) ─────────────────────
+    try:
+        from modules.tumblr_publisher import publish_to_tumblr
+        tb_ok = publish_to_tumblr(title=title, url=post_url, niche=niche)
+        if tb_ok:
+            _log.info(f"Tumblr posted [{slug}]")
+    except Exception as e:
+        _log.warning(f"Tumblr post failed: {e}")
+
     # ── Self-hosted web push (pywebpush) ─────────────────────────────────────────
     try:
         from modules.webpush_publisher import notify_subscribers
