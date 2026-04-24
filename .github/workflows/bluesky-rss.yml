@@ -1,29 +1,35 @@
 # BlogBot — Bluesky RSS Feed Bot
-# Polls the hub RSS feed every 15 minutes and posts new items to Bluesky.
-# Uses: myConsciousness/bluesky-feed-bot (MIT, actively maintained)
+# Polls all sites/*/feed.xml files every 15 minutes and posts new items to Bluesky.
 #
-# Required GitHub Secrets (set in repo Settings → Secrets → Actions):
+# This workflow uses NO third-party actions — only the official GitHub-maintained
+# actions/checkout@v4 and actions/setup-python@v5. The posting logic lives in
+# scripts/bluesky_rss_poster.py and uses the atproto library directly.
+#
+# Required GitHub Secrets (repo Settings → Secrets and variables → Actions):
 #   BLUESKY_IDENTIFIER  — your Bluesky handle, e.g. topicpulse.bsky.social
-#   BLUESKY_PASSWORD    — your Bluesky App Password (Settings → App Passwords)
+#   BLUESKY_PASSWORD    — your Bluesky App Password (bsky.app → Settings → App Passwords)
 #
-# The RSS feed URL below points to the auto-generated hub feed.
-# Change FEED_URL if you want to post from a specific niche feed instead.
+# State file: .github/bluesky_posted.json
+#   Tracks which post URLs have already been sent so nothing is double-posted.
+#   Committed back to the repo after each run. The [skip ci] tag in the commit
+#   message prevents this commit from triggering another workflow run.
 
 name: Bluesky RSS Feed Bot
 
 on:
   schedule:
-    # Run every 15 minutes — Bluesky feed bot deduplicates already-posted items
+    # Run every 15 minutes (GitHub Actions minimum granularity)
     - cron: "*/15 * * * *"
 
-  # Also fire on every push (catches new posts immediately)
+  # Also fire immediately when new posts land in the repo
   push:
     branches: [main]
     paths:
       - "sites/*/posts/**"
-      - "sitemap_hub.xml"
+      - "sites/*/feed.xml"
       - "feed.xml"
 
+  # Allow manual trigger from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -31,26 +37,47 @@ jobs:
     name: Post new RSS items to Bluesky
     runs-on: ubuntu-latest
 
+    # Write permission is required to commit the state file back to the repo
+    permissions:
+      contents: write
+
     steps:
+      # ── 1. Check out the full repo ─────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Run Bluesky Feed Bot
-        uses: myConsciousness/bluesky-feed-bot@v4
         with:
-          # Bluesky credentials (from GitHub Secrets)
-          identifier: ${{ secrets.BLUESKY_IDENTIFIER }}
-          password: ${{ secrets.BLUESKY_PASSWORD }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-          # RSS feed to poll — the BlogBot hub feed aggregating all 500 blogs
-          feed-url: "https://raw.githubusercontent.com/${{ github.repository }}/main/feed.xml"
+      # ── 2. Set up Python ───────────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
 
-          # Only post items published in the last 24 hours
-          # (prevents re-posting old items on first run)
-          interval-hours: 24
+      # ── 3. Install only what the script needs (fast, minimal, no extras) ──
+      - name: Install dependencies
+        run: |
+          pip install --quiet --upgrade pip
+          pip install --quiet "atproto>=0.0.46" "feedparser>=6.0.11"
 
-          # Include URL in post (creates a link card on Bluesky)
-          include-url: true
+      # ── 4. Run the poster ──────────────────────────────────────────────────
+      - name: Post new items to Bluesky
+        env:
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_PASSWORD:   ${{ secrets.BLUESKY_PASSWORD }}
+        run: python scripts/bluesky_rss_poster.py
 
-          # Post language tag
-          langs: "en"
+      # ── 5. Commit updated state file (prevents double-posting) ────────────
+      - name: Commit posted-state file
+        run: |
+          git config user.name  "BlogBot"
+          git config user.email "bot@blogbot.local"
+          git add .github/bluesky_posted.json
+          # Only commit if the state file actually changed
+          if git diff --staged --quiet; then
+            echo "State unchanged — nothing to commit."
+          else
+            git commit -m "chore: update Bluesky posted-state [skip ci]"
+            git push
+          fi
