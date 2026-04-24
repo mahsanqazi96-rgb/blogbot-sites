@@ -69,23 +69,34 @@ jobs:
 
   # ─────────────────────────────────────────────────────────────────────────────
   # 2. Post to Mastodon
+  # Skipped automatically when MASTODON_ACCESS_TOKEN secret is not configured.
+  # continue-on-error: true prevents a missing/invalid secret from failing the
+  # overall workflow and sending failure email notifications.
   # ─────────────────────────────────────────────────────────────────────────────
   post-mastodon:
     name: Post to Mastodon
     runs-on: ubuntu-latest
     needs: parse-feed
     if: needs.parse-feed.outputs.post_url != ''
+    continue-on-error: true   # missing secret = soft failure, not workflow failure
 
     steps:
+      - name: Skip if secret not configured
+        if: ${{ secrets.MASTODON_ACCESS_TOKEN == '' }}
+        run: |
+          echo "MASTODON_ACCESS_TOKEN not configured — skipping"
+          exit 0
+
       - name: Post to Mastodon
+        if: ${{ secrets.MASTODON_ACCESS_TOKEN != '' }}
         uses: cbrgm/mastodon-github-action@v2
         with:
           message: |
-            📰 ${{ needs.parse-feed.outputs.post_title }}
+            ${{ needs.parse-feed.outputs.post_title }}
 
             ${{ needs.parse-feed.outputs.post_desc }}
 
-            🔗 ${{ needs.parse-feed.outputs.post_url }}
+            ${{ needs.parse-feed.outputs.post_url }}
 
             #tech #news #blogging
           url:         ${{ secrets.MASTODON_INSTANCE_URL }}
@@ -93,15 +104,24 @@ jobs:
 
   # ─────────────────────────────────────────────────────────────────────────────
   # 3. Post to Discord via webhook
+  # continue-on-error: true prevents missing webhook from failing the workflow.
   # ─────────────────────────────────────────────────────────────────────────────
   post-discord:
     name: Post to Discord
     runs-on: ubuntu-latest
     needs: parse-feed
     if: needs.parse-feed.outputs.post_url != ''
+    continue-on-error: true   # missing secret = soft failure, not workflow failure
 
     steps:
+      - name: Skip if secret not configured
+        if: ${{ secrets.DISCORD_WEBHOOK_URL == '' }}
+        run: |
+          echo "DISCORD_WEBHOOK_URL not configured — skipping"
+          exit 0
+
       - name: Send Discord notification
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -110,25 +130,35 @@ jobs:
           description: |
             ${{ needs.parse-feed.outputs.post_desc }}
 
-            🔗 ${{ needs.parse-feed.outputs.post_url }}
+            ${{ needs.parse-feed.outputs.post_url }}
           color: 0x5865F2
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # 4. Post to Slack (optional — only runs if SLACK_WEBHOOK_URL secret exists)
+  # 4. Post to Slack (optional)
+  # NOTE: secrets.* cannot be used in job-level if conditions — checked at step
+  # level instead. continue-on-error: true prevents missing webhook from failing.
   # ─────────────────────────────────────────────────────────────────────────────
   post-slack:
     name: Post to Slack (optional)
     runs-on: ubuntu-latest
     needs: parse-feed
-    if: needs.parse-feed.outputs.post_url != '' && secrets.SLACK_WEBHOOK_URL != ''
+    if: needs.parse-feed.outputs.post_url != ''
+    continue-on-error: true   # optional channel — never fails the workflow
 
     steps:
+      - name: Skip if secret not configured
+        if: ${{ secrets.SLACK_WEBHOOK_URL == '' }}
+        run: |
+          echo "SLACK_WEBHOOK_URL not configured — skipping"
+          exit 0
+
       - name: Send Slack notification
+        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
             {
-              "text": "📰 *${{ needs.parse-feed.outputs.post_title }}*\n${{ needs.parse-feed.outputs.post_desc }}\n🔗 ${{ needs.parse-feed.outputs.post_url }}"
+              "text": "*${{ needs.parse-feed.outputs.post_title }}*\n${{ needs.parse-feed.outputs.post_desc }}\n${{ needs.parse-feed.outputs.post_url }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
