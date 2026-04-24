@@ -64,21 +64,45 @@ Security approach for all integrations:
 - ntfy.sh: Not needed while OneSignal works — defer to Month 3+
 - searx: Self-hosted, high setup complexity — defer
 
-### Files to be modified this session:
-| File | Change |
-|------|--------|
-| requirements.txt | Add 9 new packages with pinned versions |
-| modules/quality_control.py | textstat readability gate + clean-text normalization |
-| modules/github_publisher.py | Replace Trees API HTTP with PyGithub |
-| modules/cloudflare_manager.py | Replace raw HTTP with python-cloudflare |
-| modules/twitter_publisher.py | NEW — tweepy wrapper |
-| modules/tumblr_publisher.py | NEW — pytumblr wrapper |
-| modules/trend_detector.py | Add pytrends Google Trends source |
-| modules/competitor_intelligence.py | Add feedparser for external RSS parsing |
-| modules/alert_system.py | Add apprise unified notification backend |
-| bot_loop.py | Wire twitter + tumblr into _fire_traffic_signals() |
-| claude_code/CURRENT_STATE.md | Updated |
-| claude_code/BUILD_LOG.md | This entry |
+### Files modified (GitHub commit 7923977f5c1f):
+| File | Change | Status |
+|------|--------|--------|
+| requirements.txt | 5 new packages added (textstat, clean-text, PyGithub, pytumblr, apprise) | OK |
+| modules/quality_control.py | textstat readability check (check #19) + clean-text normalization | OK |
+| modules/twitter_publisher.py | NEW — tweepy API v2 wrapper, circuit breaker, masked creds | OK |
+| modules/tumblr_publisher.py | NEW — pytumblr link post publisher, circuit breaker | OK |
+| modules/alert_system.py | apprise unified notifications added (additive — existing unchanged) | OK |
+| modules/trend_detector.py | pytrends Google Trends source wired in | OK |
+| modules/competitor_intelligence.py | feedparser added as primary RSS parser (fallback preserved) | OK |
+| bot_loop.py | Twitter + Tumblr wired into _fire_traffic_signals() | OK |
+| claude_code/CURRENT_STATE.md | Updated | OK |
+| claude_code/BUILD_LOG.md | This entry | OK |
+
+### Packages NOT integrated (with reasons):
+| Package | Reason Skipped |
+|---------|----------------|
+| cloudflare==3.1.0 | Incompatible with Python 3.14 (Pydantic v1 compat layer broken) — cloudflare_manager.py raw requests still works |
+| feedparser | Already in requirements.txt as feedparser==6.0.11 — wired into competitor_intelligence.py |
+| pytrends | Already in requirements.txt as pytrends==4.9.2 — wired into trend_detector.py |
+| tweepy | Already in requirements.txt as tweepy==4.14.0 — twitter_publisher.py created |
+| PyGithub | Added to requirements.txt — lightweight integration only (existing Trees API code preserved) |
+
+### Security audit results:
+| Library | Network Endpoints | Credentials | Verdict |
+|---------|------------------|-------------|---------|
+| textstat | NONE — pure local | None required | CLEAN |
+| clean-text | NONE — pure local | None required | CLEAN |
+| PyGithub | api.github.com only | From config.json | CLEAN |
+| pytumblr | api.tumblr.com only | From config.json, masked in logs | CLEAN |
+| apprise | Only services YOU configure | From config.json apprise_urls key | CLEAN |
+| pytrends | trends.google.com only | None required | CLEAN |
+| feedparser | URLs you provide only | None required | CLEAN |
+| tweepy | api.twitter.com only | From config.json, masked in logs | CLEAN |
+
+All 8 libraries: PyPI packages only, pinned versions, no runtime code downloads, no telemetry.
+
+### Smoke test results (all pass):
+13/13 checks PASS | 0 FAIL | GitHub commit: 7923977f5c1f
 
 ---
 
